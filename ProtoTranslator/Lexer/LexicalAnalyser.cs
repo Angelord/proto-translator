@@ -1,20 +1,22 @@
 ﻿using System.IO;
-using System.Text;
 using System.Collections.Generic;
-using ProtoTranslator.Lexer.Tokens;
+using ProtoTranslator.Lexer.Scanners;
 
 namespace ProtoTranslator.Lexer {
     public class LexicalAnalyser {
         
+        private readonly List<ITokenScanner> scanners;
         private StreamReader fileStream;
-        private Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
         private Pointer pointer;
-
-        private bool EndOfFile => fileStream.Peek() < 0;
-
+        
         public LexicalAnalyser() {
-            ReserveWord(new WordToken(Tag.True, "true"));
-            ReserveWord(new WordToken(Tag.False, "false"));
+            
+            scanners = new List<ITokenScanner>() {
+                new NumericTokenScanner(),
+                new WordTokenScanner(),
+                new RelationalOperatorTokenScanner(),
+                new DefaultTokenScanner()
+            };
         }
 
         public List<Token> Scan(string filepath) {
@@ -40,27 +42,21 @@ namespace ProtoTranslator.Lexer {
             
             SkipWhitespace();
             
-            if (EndOfFile) { return null; }
+            if (pointer.EndOfStream) { return null; }
 
-            string nextTwo = pointer.Select(2);
+            foreach (ITokenScanner tokenScanner in scanners) {
 
-            if (char.IsDigit(pointer.Current)) {
-                return ScanNumber();
-            }
-            if (char.IsLetter(pointer.Current)) {
-                return ScanWord();
-            }
-            else if (pointer.Current == '<' || pointer.Current == '>' || pointer.Current == '!' || nextTwo == "==") {
-                return ScanRelationalOperator();
+                if (tokenScanner.TryScan(pointer, out Token token)) {
+                    return token;
+                }
             }
 
-            Token token = new MiscToken(pointer.Current);
-            pointer.Move();
-            
-            return token;
+            return null;
         }
 
         private void SkipWhitespace() {
+
+            if (pointer.EndOfStream) { return; }
 
             do {
 
@@ -75,52 +71,6 @@ namespace ProtoTranslator.Lexer {
                     return;
                 }
             } while (pointer.Move());
-        }
-        
-        private Token ScanNumber() {
-            int value = 0;
-            do {
-                value = 10 * value + (int)char.GetNumericValue(pointer.Current);
-            } while (pointer.Move() && char.IsDigit(pointer.Current));
-            
-            return new NumberToken(value);
-        }
-
-        private Token ScanWord() {
-
-            StringBuilder wordBuilder = new StringBuilder();
-            do {
-                wordBuilder.Append(pointer.Current);
-            } while (pointer.Move() && char.IsLetterOrDigit(pointer.Current));
-
-            string lexeme = wordBuilder.ToString();
-
-            WordToken wordToken;
-            if (words.TryGetValue(lexeme, out wordToken)) {
-                return wordToken;
-            }
-            
-            wordToken = new WordToken(Tag.Id, lexeme);
-            ReserveWord(wordToken);
-
-            return wordToken;
-        }
-
-        private Token ScanRelationalOperator() {
-
-            string opString;
-
-            if (pointer.Next == '=') {
-                opString = pointer.Select(2);
-                pointer.Move();
-            }
-            else {
-                opString = pointer.Current.ToString();
-            }
-
-            pointer.Move();
-
-            return new RelationalToken(opString);
         }
 
         private void SkipSingleLineComment() {
@@ -138,10 +88,6 @@ namespace ProtoTranslator.Lexer {
                     return;
                 }
             }
-        }
-
-        private void ReserveWord(WordToken wordToken) {
-            words.Add(wordToken.Lexeme, wordToken);
         }
     }
 }

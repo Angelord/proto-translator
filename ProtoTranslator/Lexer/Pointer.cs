@@ -17,7 +17,9 @@ namespace ProtoTranslator.Lexer {
 
         public bool IsAtWhitespace => Current == '\n' || Current == ' ' || Current == '\t' || Current == '\r';
 
-        private bool EndOfFile => stream.Peek() < 0;
+        public bool EndOfStream => StreamIsEmpty && scanned.Length == 0;
+        
+        private bool StreamIsEmpty => stream.Peek() < 0;
 
         public Pointer(StreamReader stream) {
             this.stream = stream;
@@ -32,7 +34,7 @@ namespace ProtoTranslator.Lexer {
         /// <param name="count">The number of characters to return</param>
         public string Select(int count) {
 
-            while (scanned.Length < count && !EndOfFile) {
+            while (scanned.Length < count && !StreamIsEmpty) {
                 scanned.Append((char)stream.Read());
             }
 
@@ -45,7 +47,7 @@ namespace ProtoTranslator.Lexer {
             
             scanned.Remove(0, 1);
 
-            if (!EndOfFile) {
+            if (!StreamIsEmpty) {
                 scanned.Append((char)stream.Read());
             }
             else if(scanned.Length == 0) {    

@@ -39,7 +39,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lexer\LexicalAnalyser.cs" />
+    <Compile Include="Lexer\Scanners\DefaultTokenScanner.cs" />
+    <Compile Include="Lexer\Scanners\NumericTokenScanner.cs" />
+    <Compile Include="Lexer\Scanners\RelationalOperatorTokenScanner.cs" />
+    <Compile Include="Lexer\Scanners\ITokenScanner.cs" />
     <Compile Include="Lexer\Pointer.cs" />
+    <Compile Include="Lexer\Scanners\WordTokenScanner.cs" />
     <Compile Include="Lexer\Tag.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Lexer\Tokens\RelationalToken.cs" />

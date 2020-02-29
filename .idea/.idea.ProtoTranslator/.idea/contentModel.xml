@@ -8,12 +8,19 @@
         <e p="Lexer" t="Include">
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
+          <e p="Scanners" t="Include">
+            <e p="DefaultTokenScanner.cs" t="Include" />
+            <e p="ITokenScanner.cs" t="Include" />
+            <e p="NumericTokenScanner.cs" t="Include" />
+            <e p="RelationalOperatorTokenScanner.cs" t="Include" />
+            <e p="WordTokenScanner.cs" t="Include" />
+          </e>
           <e p="Tag.cs" t="Include" />
           <e p="Token.cs" t="Include" />
           <e p="Tokens" t="Include">
-            <e p="ComparisonToken.cs" t="Include" />
             <e p="MiscToken.cs" t="Include" />
             <e p="NumberToken.cs" t="Include" />
+            <e p="RelationalToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
           </e>
         </e>
