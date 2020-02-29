@@ -1,9 +1,9 @@
 ﻿namespace ProtoTranslator.Lexer.Tokens {
-    public class NumberToken : Token {
+    public class FloatToken : Token {
 
-        public readonly int Value;
-        
-        public NumberToken(int value) : base(Tag.Num) {
+        public readonly float Value;
+
+        public FloatToken(float value) : base(Tag.Float) {
             Value = value;
         }
         

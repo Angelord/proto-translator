@@ -18,8 +18,9 @@
           <e p="Tag.cs" t="Include" />
           <e p="Token.cs" t="Include" />
           <e p="Tokens" t="Include">
+            <e p="FloatToken.cs" t="Include" />
+            <e p="IntegerToken.cs" t="Include" />
             <e p="MiscToken.cs" t="Include" />
-            <e p="NumberToken.cs" t="Include" />
             <e p="RelationalToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
           </e>
