@@ -42,6 +42,7 @@
     <Compile Include="Lexer\Pointer.cs" />
     <Compile Include="Lexer\Tag.cs" />
     <Compile Include="Lexer\Token.cs" />
+    <Compile Include="Lexer\Tokens\RelationalToken.cs" />
     <Compile Include="Lexer\Tokens\MiscToken.cs" />
     <Compile Include="Lexer\Tokens\NumberToken.cs" />
     <Compile Include="Lexer\Tokens\WordToken.cs" />

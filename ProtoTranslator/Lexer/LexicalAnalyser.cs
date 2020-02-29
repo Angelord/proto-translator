@@ -42,11 +42,16 @@ namespace ProtoTranslator.Lexer {
             
             if (EndOfFile) { return null; }
 
+            string nextTwo = pointer.Select(2);
+
             if (char.IsDigit(pointer.Current)) {
                 return ScanNumber();
             }
             if (char.IsLetter(pointer.Current)) {
                 return ScanWord();
+            }
+            else if (pointer.Current == '<' || pointer.Current == '>' || pointer.Current == '!' || nextTwo == "==") {
+                return ScanRelationalOperator();
             }
 
             Token token = new MiscToken(pointer.Current);
@@ -99,6 +104,23 @@ namespace ProtoTranslator.Lexer {
             ReserveWord(wordToken);
 
             return wordToken;
+        }
+
+        private Token ScanRelationalOperator() {
+
+            string opString;
+
+            if (pointer.Next == '=') {
+                opString = pointer.Select(2);
+                pointer.Move();
+            }
+            else {
+                opString = pointer.Current.ToString();
+            }
+
+            pointer.Move();
+
+            return new RelationalToken(opString);
         }
 
         private void SkipSingleLineComment() {

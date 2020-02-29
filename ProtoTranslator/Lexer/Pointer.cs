@@ -13,6 +13,8 @@ namespace ProtoTranslator.Lexer {
 
         public char Current => scanned[0];
 
+        public char Next => scanned.Length > 1 ? scanned[1] : (char)stream.Peek();
+
         public bool IsAtWhitespace => Current == '\n' || Current == ' ' || Current == '\t' || Current == '\r';
 
         private bool EndOfFile => stream.Peek() < 0;

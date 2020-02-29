@@ -4,6 +4,7 @@
         Num,
         Id,
         True,
-        False
+        False,
+        Relational
     }
 }

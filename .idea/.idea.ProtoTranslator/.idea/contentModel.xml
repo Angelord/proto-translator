@@ -7,12 +7,15 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Lexer" t="Include">
           <e p="LexicalAnalyser.cs" t="Include" />
-          <e p="MiscToken.cs" t="Include" />
-          <e p="NumberToken.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
           <e p="Tag.cs" t="Include" />
           <e p="Token.cs" t="Include" />
-          <e p="WordToken.cs" t="Include" />
+          <e p="Tokens" t="Include">
+            <e p="ComparisonToken.cs" t="Include" />
+            <e p="MiscToken.cs" t="Include" />
+            <e p="NumberToken.cs" t="Include" />
+            <e p="WordToken.cs" t="Include" />
+          </e>
         </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="Program.cs" t="Include" />
