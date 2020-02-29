@@ -1,4 +1,4 @@
-﻿namespace ProtoTranslator.Lexer {
+﻿namespace ProtoTranslator.Lexer.Tokens {
     public class NumberToken : Token {
 
         public readonly int Value;

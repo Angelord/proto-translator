@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.AccessControl;
+﻿using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer {
     public class LexicalAnalyser {
         
         private StreamReader fileStream;
         private Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
-        private char prevChar = ' ';
-        private char curChar = ' ';
-        private int lines;
+        private Pointer pointer;
 
         private bool EndOfFile => fileStream.Peek() < 0;
 
@@ -21,11 +18,12 @@ namespace ProtoTranslator.Lexer {
         }
 
         public List<Token> Scan(string filepath) {
-
             List<Token> result = new List<Token>();
             
             fileStream = new StreamReader(filepath);
             using (fileStream) {
+                
+                pointer = new Pointer(fileStream);
 
                 Token token = ScanToken();
 
@@ -39,45 +37,46 @@ namespace ProtoTranslator.Lexer {
         }
 
         private Token ScanToken() {
-
+            
             SkipWhitespace();
-
+            
             if (EndOfFile) { return null; }
 
-            if (char.IsDigit(curChar)) {
+            if (char.IsDigit(pointer.Current)) {
                 return ScanNumber();
             }
-            if (char.IsLetter(curChar)) {
+            if (char.IsLetter(pointer.Current)) {
                 return ScanWord();
             }
 
-            Token token = new MiscToken(curChar);
-            curChar = ' ';
-
+            Token token = new MiscToken(pointer.Current);
+            pointer.Move();
+            
             return token;
         }
 
         private void SkipWhitespace() {
 
-            while (MovePointer()) {
+            do {
 
-                if (prevChar == '/' && curChar == '/') {
+                string nextTwo = pointer.Select(2);
+                if (nextTwo == "//") {
                     SkipSingleLineComment();
                 }
-                else if (prevChar == '/' && curChar == '*') {
+                else if (nextTwo == "/*") {
                     SkipMultiLineComment();
                 }
-                else if (curChar != '\n' && curChar != ' ' && curChar != '\t' && curChar != '\r') {
+                else if (!char.IsWhiteSpace(pointer.Current)) {
                     return;
                 }
-            }
+            } while (pointer.Move());
         }
         
         private Token ScanNumber() {
             int value = 0;
             do {
-                value = 10 * value + (int)char.GetNumericValue(curChar);
-            } while (MovePointer() && char.IsDigit(curChar));
+                value = 10 * value + (int)char.GetNumericValue(pointer.Current);
+            } while (pointer.Move() && char.IsDigit(pointer.Current));
             
             return new NumberToken(value);
         }
@@ -86,8 +85,8 @@ namespace ProtoTranslator.Lexer {
 
             StringBuilder wordBuilder = new StringBuilder();
             do {
-                wordBuilder.Append(curChar);
-            } while (MovePointer() && char.IsLetterOrDigit(curChar));
+                wordBuilder.Append(pointer.Current);
+            } while (pointer.Move() && char.IsLetterOrDigit(pointer.Current));
 
             string lexeme = wordBuilder.ToString();
 
@@ -104,31 +103,19 @@ namespace ProtoTranslator.Lexer {
 
         private void SkipSingleLineComment() {
             
-            while (MovePointer()) {
-                if(curChar == '\n') return;
+            while (pointer.Move()) {
+                if(pointer.Current == '\n') return;
             }
         }
 
         private void SkipMultiLineComment() {
 
-            while (MovePointer()) {
-                if(prevChar == '*' && curChar == '/') return;
+            while (pointer.Move()) {
+                if (pointer.Select(2) == "*/") {
+                    pointer.Move();
+                    return;
+                }
             }
-        }
-
-        private bool MovePointer() {
-            if (EndOfFile) {
-                return false;
-            }
-
-            prevChar = curChar;
-            curChar = (char)fileStream.Read();
-
-            if (curChar == '\n') {
-                lines++;
-            }
-
-            return true;
         }
 
         private void ReserveWord(WordToken wordToken) {

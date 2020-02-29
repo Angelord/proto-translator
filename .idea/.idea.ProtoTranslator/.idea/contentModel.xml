@@ -9,6 +9,7 @@
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="MiscToken.cs" t="Include" />
           <e p="NumberToken.cs" t="Include" />
+          <e p="Pointer.cs" t="Include" />
           <e p="Tag.cs" t="Include" />
           <e p="Token.cs" t="Include" />
           <e p="WordToken.cs" t="Include" />
