@@ -1,0 +1,207 @@
+Азбука
+------
+
+ Letter = 'a'..'z' | 'A'..'Z' | '_'.
+ Digit = '0'..'9'.
+ Space = #9 | #10 | #13 | ' '.
+ AnyChar = ' '..#255.
+
+Лексеми
+-------
+
+  Number = Digit {Digit}.
+  Ident = Letter {Letter | Digit}.
+  Delimiter = Space | '{' {AnyChar}\'}' '}'
+  String = ''' {AnyChar} ''' {''' {AnyChar} '''}$.
+  Keyword = 'PROGRAM' | 'CONST' | 'TYPE' | 'VAR' | 'FUNCTION' |
+            'BEGIN' | 'END' | 'IF' | 'THEN' | 'ELSE' | 'WHILE' | 'DO' |
+            'OR' | 'DIV' | 'MOD' | 'AND' | 'NOT'.
+  SpecialSymbol = ':=' | '<=' | '<>' | '>=' | '=' | '<' | '>' |
+                  '(' | ')' | ';' | '+' | '-' | '*' | '.' | ':' | ',' | '..'.
+  OtherSymbol = ...
+
+Граматика
+---------
+
+[ 1]  Program = 'PROGRAM' Ident ';' Block '.'.
+[ 2]  Block = {ConstsDef | TypesDef | VarsDef | ProcsDef | FuncsDef} CompoundOp.
+[ 3]  ConstsDef = 'CONST' {Ident '=' Constant ';'}.
+[ 4]  TypesDef = 'TYPE' {Ident '=' Type ';'}.
+[ 5]  VarsDef = 'VAR' {Ident ':' Type ';'}.
+[ 6]  FuncsDef = 'FUNCTION' Ident '(' Ident ':' Type ')' ':' Type ';' Block ';'.
+[ 7]  Type = TypeIdent | '(' Ident {',' Ident} ')' | Constant '..' Constant.
+[ 8]  Operator = CompoundOp | AssignOp | ProcOp | IfOp | WhileOp.
+[ 9]  CompoundOp = 'BEGIN' {Operator ';'} 'END'.
+[10]  AssignOp = (VarIdent | FuncIdent) ':=' Expression.
+[11]  ProcOp = FuncIdent '(' Expression ')'.
+[12]  IfOp = 'IF' Expression 'THEN' Operator ['ELSE' Operator].
+[13]  WhileOp = 'WHILE' Expression 'DO' Operator.
+[14]  Expression = SimpleExpr [('<' | '<=' | '=' | '<>' | '>=' | '>') SimpleExpr].
+[15]  SimpleExpr = ['+'|'-'] Term {('+' | '-' | 'OR') Term}.
+[16]  Term = Factor {('*' | 'DIV' | 'MOD' | 'AND') Factor}.
+[17]  Factor = FuncIdent '(' Expression ')' | 'NOT' Factor | Constant | Variable | '(' Expression ')'.
+[18]  Constant = ['+'|'-'] (Number | ConstIdent) | String.
+[19]  Variable = ['+'|'-'] VarIdent.
+
+Таблици
+-------
+
+  Дефинирани Идентификатори (Name, Kind, [Type, Offset, Param], ...)
+
+  Вградени типове и функции:
+    типове    { Integer, Boolean, Char, String, Byte, Word }
+    функции   { Abs, Sqr, Odd, Ord, Succ, Pred }
+    функции   { Read, ReadLn, Write, WriteLn }
+
+
+Примери
+-------
+
+program E1;
+var
+  A: Integer;
+  B: Integer;
+begin
+  A := ReadLn(0);
+  B := A*2;
+  WriteLn(B);
+end.
+
+program E2;
+var
+  A: Integer;
+  B: Integer;
+begin
+  A := ReadLn(0);
+  B := ReadLn(0);
+  WriteLn(A+B);
+end.
+
+program E3;
+var
+  A: Integer;
+  B: Integer;
+  C: Integer;
+begin
+  A := ReadLn(0);
+  B := ReadLn(0);
+  C := (A*A+B*B)*2;
+  WriteLn(C);
+end.
+
+program E4;
+var
+  A: Integer;
+  B: Integer;
+  C: Integer;
+begin
+  A := ReadLn(0);
+  B := ReadLn(0);
+  C := Abs(A+B);
+  WriteLn(C);
+end.
+
+program E5;
+const
+  C1=100;
+var
+  A: Integer;
+  B: Integer;
+begin
+  A := ReadLn(0);
+  B := ReadLn(0);
+  WriteLn(C1*A+B);
+end.
+
+program E6;
+var
+  A: Integer;
+  B: Integer;
+  C: Integer;
+
+  function MyFunc(X:Integer):Integer;
+  begin
+    MyFunc := X*X+1;
+  end;
+
+begin
+  A := ReadLn(0);
+  B := ReadLn(0);
+  C := MyFunc(A+B);
+  WriteLn(C);
+end.
+
+program E7;
+var
+  A: Integer;
+  B: Integer;
+  C: Integer;
+
+  function MyFunc(X:Integer):Integer;
+  begin
+    MyFunc := X*X+1;
+  end;
+
+begin
+  Write('Enter A=');
+  A := ReadLn(0);
+  Write('Enter B=');
+  B := ReadLn(0);
+  C := MyFunc(A+B);
+  Write('Result C=');
+  WriteLn(C);
+end.
+
+program E8;
+type
+  MyType=5..10;
+var
+  A: MyType;
+  B: MyType;
+
+  function ReadMyType(X:string):MyType;
+  var
+    V: Integer;
+  begin
+    Write('Enter '+X+' [5..10]: ');
+    V := ReadLn(0);
+    while (V<5) and (V>10) do
+      begin
+        WriteLn('ERROR!');
+        Write('Enter '+X+' [5..10]: ');
+        V := ReadLn(0);
+      end;
+    ReadMyType := V;
+  end;
+
+begin
+  A := ReadMyType('A');
+  B := ReadMyType('B');
+  if A>B then
+    WriteLn('A is greater!');
+  if A<B then
+    WriteLn('B is greater!');
+  if A=B then
+    WriteLn('A and B are equal!');
+end.
+
+program E9;
+
+  function IntToBin(X:Integer):string;
+  var
+    S: string;
+  begin
+    S := '';
+    if X=0 then S := '0';
+    while X>0 do
+      begin
+        if (X and 1)=0 then S := '0'+S;
+        if (X and 1)=1 then S := '1'+S;
+        X := X DIV 2;
+      end;
+    IntToBin := S;
+  end;
+
+begin
+  WriteLn(IntToBin(ReadLn(0)));
+end.

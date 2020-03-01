@@ -1,0 +1,83 @@
+Азбука
+------
+
+  Letter = 'a'..'z' | 'A'..'Z' | '_'.
+  Digit = '0'..'9'.
+  HexDigit = Digit | 'a'..'f' | 'A'..'F'.
+  Space = \t | \n | \r | ' '.
+  Escape = '\'.
+  AnyChar = ' '..\0xff.
+
+Лексеми
+-------
+
+  Number = Digit {Digit} | ('0x'|'0X') HexDigit {HexDigit} | {Digit} '.' {Digit} [ ('E'|'e')['+'|'-'] Digit {Digit} ].
+  Ident = Letter {Letter | Digit}.
+  String = '"' {{AnyChar\(Escape|'"')} [Escape('0'|'b'|'t'|'n'|'f'|'r'|'"'|'''|Escape)]} '"'
+  Delimiter = Space | '/*' {AnyChar}\('*' '/') '*/' | '//' {AnyChar\(\n|\r)}
+  Keyword = 'typedef' | 'static' | 
+            'void' | 'char' | 'bool' | 'short' | 'int' | 'long' | 'double' | 'signed' | 'unsigned' |
+            'struct' | 'union' | 'enum' | 'case' | 'default' |
+            'if' | 'else' | 'switch' | 'while' | 'do' | 'for' |
+            'continue' | 'break' | 'return'.
+  SpecialSymbol = ';' | '{' | '}' | ',' | '=' | '*' | '(' | ')' | '[' | ']' |
+                  '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=' |
+                  '?' | ':' | '||' | '&&' | '|' | '^' | '&' | '==' | '!=' | '<' | '>' | '<=' | '>=' |
+                  '<<' | '>>' | '+' | '-' | '/' | '%' | '++' | '--' | '~' | '!' | '.' | '->'.
+  OtherSymbol = ...
+
+Граматика
+---------
+
+[1] Program = {Declaration | FunctionDefinition}.
+[2] Declaration = DeclarationSpecifier [Declarator] ';'.
+[3] DeclarationSpecifier = ['typedef' | 'static'] TypeSpecifier.
+[4] TypeSpecifier = 'void' | 'char' | 'bool' | 'short' | 'int' | 'long' | 'double' | 'signed' | 'unsigned' |
+      StructOrUnionSpecifier | EnumSpecifier | TypeName.
+[5] StructOrUnionSpecifier = ('struct' | 'union') [Ident] '{' {StructDeclaration} '}'.
+[6] StructDeclaration = TypeSpecifier Declarator {',' Declarator} ';'.
+[7] EnumSpecifier = 'enum' [Ident] '{' Enumerator {',' Enumerator} '}'
+[8] Enumerator = Ident ['=' ConstantExpression].
+[9] Declarator = {'*'} DirectDeclarator.
+[10] DirectDeclarator = Ident | '(' Declarator ')' |
+      DirectDeclarator ( '[' [ConstantExpression] ']' | '(' [ParameterTypeList] | [Ident {',' Ident}] ')' ).
+[11] ParameterTypeList = ParameterDeclaration {',' ParameterDeclaration}.
+[12] ParameterDeclaration = DeclarationSpecifier [Declarator | AbstractDeclarator].
+[13] TypeName = TypeSpecifier [AbstractDeclarator].
+[14] AbstractDeclarator = {'*'} DirectAbstractDeclarator.
+[15] DirectAbstractDeclarator = '(' AbstractDeclarator ')' |
+      [DirectAbstractDeclarator] ( '[' [ConstantExpression] ']' | '(' [ParameterTypeList] ')' ).
+[16] FunctionDefinition = [DeclarationSpecifier] Declarator {Declaration} CompoundStatement.
+[17] Expression = AssignmentExpression {',' AssignmentExpression}.
+[18] ConstantExpression = ConditionalExpression.
+[19] AssignmentExpression = ConditionalExpression |
+      UnaryExpression ('=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|=') AssignmentExpression.
+[20] ConditionalExpression = LogicalORExpression |
+      LogicalORExpression '?' Expression ':' ConditionalExpression.
+[21] LogicalORExpression = LogicalANDExpression {'||' LogicalANDExpression}.
+[22] LogicalANDExpression = InclusiveORExpression {'&&' InclusiveORExpression}.
+[23] InclusiveORExpression = ExclusiveORExpression {'|' ExclusiveORExpression}.
+[24] ExclusiveORExpression = ANDExpression {'^' ANDExpression}.
+[25] ANDExpression = EqualityExpression {'&' EqualityExpression}.
+[26] EqualityExpression = RelationalExpression ('==' | '!=') RelationalExpression.
+[27] RelationalExpression = ShiftExpression {('<' | '>' | '<=' | '>=') ShiftExpression}.
+[28] ShiftExpression = AdditiveExpression {('<<' | '>>') AdditiveExpression}.
+[29] AdditiveExpression = MultiplicativeExpression {('+' | '-') MultiplicativeExpression}.
+[30] MultiplicativeExpression = CastExpression {('*' | '/' | '%') CastExpression}.
+[31] CastExpression = {'(' TypeName ')'} UnaryExpression.
+[32] UnaryExpression = PostfixExpression | ('++' | '--') UnaryExpression |
+      ('&' | '*' | '-' | '~' | '!') CastExpression.
+[33] PostfixExpression = PrimaryExpression | PostfixExpression '[' Expression ']' |
+      PostfixExpression '(' [AssignmentExpression {',' AssignmentExpression}] ')' |
+      PostfixExpression '.' Ident | PostfixExpression '->' Ident |
+      PostfixExpression ('++' | '--').
+[34] PrimaryExpression = Ident | Number | String | '(' Expression ')'.
+[35] Statement = LabeledStatement | CompoundStatement | ExpressionStatement |
+      SelectionStatement | IterationStatement | JumpStatement.
+[36] LabeledStatement = 'case' ConstantExpression ':' Statement | 'default' ':' Statement.
+[37] CompoundStatement = '{' {[Declaration] [Statement]} '}'.
+[38] ExpressionStatement = [Expression] ';'.
+[39] SelectionStatement = 'if' '(' Expression ')' Statement ['else' Statement] | 'switch' '(' Expression ')' Statement.
+[40] IterationStatement = 'while' '(' Expression ')' Statement |
+      'do' Statement 'while' '(' Expression ')' ';' | 'for' '(' ExpressionStatement ExpressionStatement [Expression] ')' Statement.
+[41] JumpStatement = 'continue' ';' | 'break' ';' | 'return' [Expression] ';'.

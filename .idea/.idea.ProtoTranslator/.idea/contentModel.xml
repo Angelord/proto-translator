@@ -5,6 +5,7 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="ProtoTranslator" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Environment.cs" t="Include" />
         <e p="Lexer" t="Include">
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
@@ -34,6 +35,7 @@
         <e p="Resources" t="Include">
           <e p="Program.c" t="Include" />
         </e>
+        <e p="Symbol.cs" t="Include" />
       </e>
       <e p="ProtoTranslator.sln" t="IncludeFlat" />
     </e>

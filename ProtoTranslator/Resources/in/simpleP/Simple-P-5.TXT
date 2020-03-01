@@ -1,0 +1,195 @@
+Азбука
+------
+
+  Letter = 'a'..'z' | 'A'..'Z' | '_'.
+  Digit = '0'..'9'.
+  Space = #9 | #10 | #13 | ' '.
+  AnyChar = ' '..#255.
+
+Лексеми
+-------
+
+  Number = Digit {Digit} | {Digit} '.' {Digit} [ ('E'|'e')['+'|'-'] Digit {Digit} ].
+  Ident = Letter {Letter | Digit}.
+  String = ''' {AnyChar} ''' {''' {AnyChar} '''}.
+  Delimiter = Space | '{' {AnyChar} '}' | '//' {AnyChar\(#10|#13)}
+  Keyword = 'PROGRAM' | 'CONST' | 'TYPE' | 'VAR' |
+            'PROCEDURE' | 'FUNCTION' | 'ARRAY' | 'OF' | 'BEGIN' |
+            'END' | 'IF' | 'THEN' | 'ELSE' | 'WHILE' | 'DO' | 'BREAK' | 'CONTINUE' |
+            'REPEAT' | 'UNTIL' | 'FOR' | 'TO' | 'DOWNTO' | 'CASE' |
+            'OR' | 'DIV' | 'MOD' | 'AND' | 'NOT' |
+            'RESULT' | 'RECORD' | 'SET' | 'IN'.
+  SpecialSymbol = ':=' | '<=' | '<>' | '>=' | '..' | '=' | '<' | '>' |
+                  '(' | ')' | '[' | ']' | ';' | ':' | '.' | ',' | '+' |
+                  '-' | '*'.
+  OtherSymbol = ...
+
+Граматика
+---------
+
+
+[ 1]  Program = 'PROGRAM' Ident ';' Block '.'.
+[ 2]  Block = {ConstsDef | TypesDef | VarsDef | ProcsDef | FuncsDef} CompoundOp.
+[ 3]  ConstsDef = 'CONST' {Ident '=' Constant ';'}.
+[ 4]  TypesDef = 'TYPE' {Ident '=' Type ';'}.
+[ 5]  VarsDef = 'VAR' {Ident ':' Type ';'}.
+[ 6]  ProcsDef = 'PROCEDURE' Ident [FormalParamsList] ';' Block ';'.
+[ 7]  FuncsDef = 'FUNCTION' Ident [FormalParamsList] ':' Type ';' Block ';'.
+[ 8]  FormalParamsList = '(' FormalParam {';' FormalParam} ')'.
+[ 9]  FormalParam = ['VAR'] Ident ':' Type.
+[10]  Type = TypeIdent | SimpleType | CompoundType.
+[11]  SimpleType = '(' Ident {',' Ident} ')' | Constant '..' Constant.
+[12]  CompoundType = RecordType | ArrayType | SetType.
+[14]  RecordType = 'RECORD' {Ident ':' Type ';'} 'END'.
+[13]  ArrayType = 'ARRAY' '[' SimpleType ']' 'OF' Type.
+[14]  SetType = 'SET' 'OF' Type.
+[15]  Operator = CompoundOp | AssignOp | ProcOp | IfOp | CaseOp | WhileOp | RepeatOp | ForOp | 'BREAK' | 'CONTINUE'.
+[16]  CompoundOp = 'BEGIN' {Operator ';'} 'END'.
+[17]  AssignOp = (Designator | FuncIdent | 'RESULT') ':=' Expression.
+[18]  ProcOp = ProcIdent ['(' Expression {',' Expression} ')'].
+[19]  IfOp = 'IF' Expression 'THEN' Operator ['ELSE' Operator].
+[19]  CaseOp = 'CASE' Expression 'OF' {Expression ':' Operator ';'} ['ELSE' Operator] [';'] 'END'.
+[20]  WhileOp = 'WHILE' Expression 'DO' Operator.
+[21]  RepeatOp = 'REPEAT' {Operator ';'} 'UNTIL' Expression.
+[22]  ForOp = 'FOR' VarIdent ':=' Expression ('TO'|'DOWNTO') Expression 'DO' Operator.
+[23]  Expression = SimpleExpr [('<' | '<=' | '=' | '<>' | '>=' | '>' | 'IN') SimpleExpr].
+[24]  SimpleExpr = ['+'|'-'] Term {('+' | '-' | 'OR' | 'XOR') Term}.
+[25]  Term = Factor {('*' | '/' | 'DIV' | 'MOD' | 'AND' | 'SHL' | 'SHR') Factor}.
+[26]  Factor = Designator ['(' Expression {',' Expression} ')'] | 'NOT' Factor | Constant | '(' Expression ')'.
+[27]  Constant = ['+'|'-'] (Number | ConstantIdent) | String | '[' {Expression ','} ']'.
+[28]  Designator -> Ident {'.' FieldIdent | '[' Expression ']'}.
+
+
+  Забележка: ConstIdent, TypeIdent, VarIdent, FieldIdent, ProcIdent и FuncIdent са
+  идентификатори, като Ident, но на вече дефинирани обекти - съответно
+  константи, типове, променливи, полета на запис, процедури и функции.
+  Разграничаването им може да стане само чрез таблицата на дефинираните
+  идентификатори.
+
+Таблици
+-------
+
+  Дефинирани Идентификатори (Name, Kind, [Type, Offset, Param], ...)
+
+  Вградени типове, процедури и функции:
+    типове    { Integer, Byte, Word, Boolean, Char, String, Double }
+    процедури { Write, WriteLn, Read, ReadLn, Delete, Insert }
+    функции   { Abs, Sqr, Odd, Ord, Chr, Succ, Pred, Copy, Concat, Length, Pos, Round, Trunc, Sqrt, Exp, Ln }
+
+Семантика
+---------
+
+[ 1]  Program = 'PROGRAM' Ident ';' Block '.'.
+      ; Program Ident
+      семантиката на Block
+
+[ 2]  Block = {ConstsDef | TypesDef | VarsDef | ProcsDef | FuncsDef} CompoundOp.
+      семантиката на ConstsDef
+      семантиката на TypesDef
+      семантиката на VarsDef
+      семантиката на ProcsDef
+      семантиката на FuncsDef
+      ...
+
+      семантиката на CompoundOp
+
+[ 3]  ConstsDef = 'CONST' {Ident '=' Constant ';'}.
+      ; Constants definition
+      Ident       EQU       Constant
+      ...
+
+[18]  IfOp = 'IF' Expression 'THEN' Operator.
+      ; If ...
+      Семантиката на Expression
+      JumpIfZero  #E1005
+      Семантиката на Operator
+E1005:
+
+Примери
+-------
+
+Program Prog1; { constants }
+
+Const
+  C1 = 100;
+  C2 = -100;
+  C3 = C1;
+
+Begin
+End.
+
+Program Prog2; { types and variables }
+
+Type
+  T1 = Integer;
+  T2 = 2..100;
+  T3 = (Zero,One,Two);
+  T4 = T3;
+
+  T5 = Array[-10..10] of Integer;
+  T6 = Array[0..10] of T5;
+  T7 = Array[T2] of T3;
+
+Begin
+End.
+
+
+Program Prog3; { variables and simple expresions }
+
+Var
+  A : Integer;
+  B : Integer;
+  C : Integer;
+
+Begin
+  A := 1;
+  B := 2;
+  C := (A+B)*2;
+End.
+
+
+Program Prog4; { simple procedures and functions }
+
+Var
+  Name : String;
+
+Function Hello : String;
+Var Name : String;
+Begin
+  WriteLn('Hello!');
+  WriteLn('What is your name?);
+  ReadLn(Name);
+  Hello := Name;
+End;
+
+Procedure GoodBye(Name : String);
+Begin
+  Write('GoodBye, ');
+  Write(Name);
+  WriteLn('.');
+End;
+
+Begin
+  Name := Hello;
+  WriteLn('This is simple example.');
+  GoodBye(Name);
+End.
+
+
+Program Prog5; { functions with parameters }
+
+Function Min(X : Integer; Y : Integer) : Integer;
+Begin
+  If X<Y Then Min := X Else Min := Y;
+End;
+
+Var
+  A : Integer;
+  B : Integer;
+  C : Integer;
+
+Begin
+  A := 2;
+  B := 5;
+  C := Min(A,B)+1;
+End.

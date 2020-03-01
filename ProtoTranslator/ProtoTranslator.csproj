@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Environment.cs" />
     <Compile Include="Lexer\LexicalAnalyser.cs" />
     <Compile Include="Lexer\Scanners\DefaultTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\NumericTokenScanner.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Lexer\Tokens\WordToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Symbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Program.c">

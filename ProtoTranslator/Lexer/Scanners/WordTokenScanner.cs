@@ -6,11 +6,42 @@ using ProtoTranslator.Lexer.Tokens;
 namespace ProtoTranslator.Lexer.Scanners {
     public class WordTokenScanner : ITokenScanner {
 
-        private Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
+        private readonly Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
 
+        private static readonly string[] Keywords = {
+            "typedef",
+            "static",
+            "void",
+            "char",
+            "bool",
+            "short",
+            "int",
+            "long",
+            "double",
+            "signed",
+            "unsigned",
+            "struct",
+            "union",
+            "enum",
+            "case",
+            "default",
+            "if",
+            "else",
+            "switch",
+            "while",
+            "do",
+            "for",
+            "continue",
+            "break",
+            "return",
+            "true",
+            "false"
+        };
+        
         public WordTokenScanner() {
-            ReserveWord(new WordToken(Tag.True, "true"));
-            ReserveWord(new WordToken(Tag.False, "false"));
+            foreach (string keyword in Keywords) {
+                ReserveWord(new WordToken(Tag.Keyword, keyword));
+            }
         }
 
         public bool TryScan(Pointer pointer, out Token token) {

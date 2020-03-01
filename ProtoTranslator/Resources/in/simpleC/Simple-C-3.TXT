@@ -1,0 +1,80 @@
+Азбука
+------
+
+ Letter = 'a'..'z' | 'A'..'Z' | '_'.
+ Digit = '0'..'9'.
+ Space = \t | \n | \r | ' '.
+ AnyChar = ' '..\0xff.
+
+Лексеми
+-------
+
+  Number = Digit {Digit}.
+  Ident = Letter {Letter | Digit}.
+  Delimiter = Space | '/*' {AnyChar}\('*' '/') '*/'
+  Keyword = 'if' | 'else' | 'while' | 'break' | 'continue' | 'return'.
+  SpecialSymbol = '=' | '+=' | '-=' | '*=' | '/=' | '%=' |
+                  '(' | ')' | ';' | '+' | '-' | '*' | 
+                  '|' | '/' | '%' | '&' | '~' | '++' | '--' | 
+                  '<=' | '!=' | '>=' | '==' | '<' | '>' | '||' | '&&' | '!'.
+  OtherSymbol = ...
+
+Граматика
+---------
+
+[1]  Program = {Statement}.
+[2]  Statement = CompoundSt | IfSt | WhileSt | StopSt | [Expression] ';'.
+[3]  CompoundSt = '{' {Declaration} {Statement} '}'
+[4]  Declaration = VarDef | FuncDef.
+[5]  VarDef = TypeIdent Ident.
+[6]  FuncDef = TypeIdent Ident '(' TypeIdent Ident ')' CompoundSt.
+[7]  IfSt = 'if' '(' Expression ')' Statement ['else' Statement].
+[8]  WhileSt = 'while' '(' Expression ')' Statement. 
+[9]  StopSt = 'break' ';' | 'continue' ';' | 'return' [Expression] ';'
+[10] Expression =  AdditiveExpr [('<' | '<=' | '==' | '!=' | '>=' | '>') AdditiveExpr].
+[11] AdditiveExpr = ['+' | '-'] MultiplicativeExpr {('+' | '-' | '|' | '||') MultiplicativeExpr}.
+[12] MultiplicativeExpr = SimpleExpr {('*' | '/' | '%' | '&' | '&&') SimpleExpr}.
+[13] SimpleExpr = ('++' | '--' | '-' | '~' | '!') PrimaryExpr | PrimaryExpr ['++' | '--'].
+[14] PrimaryExpr = Constant | Variable | VarIdent [('='|'+='|'-='|'*='|'/='|'%=') Expression] |
+					'*' VarIdent | '&' VarIdent | FuncIdent '(' [Expression] ')' | '(' Expression ')'.
+[15] Constant = ['+'|'-'] (Number | ConstIdent) | String.
+[16] Variable = ['+'|'-'] VarIdent.
+
+Таблици
+-------
+
+  Дефинирани Идентификатори (Name, Kind, [Type, Offset, Param], ...)
+
+  Вградени типове и функции:
+    типове    { int, bool, char, *, pchar }
+    функции   { abs, sqr, odd, ord }
+    функции   { scanf, printf }
+
+
+Примери
+-------
+
+A = scanf();
+B = A*2;
+printf(B);
+
+
+A = scanf();
+B = scanf();
+printf(A+B);
+
+A = scanf();
+B = scanf();
+C = (A*A+B*B)*2;
+printf(C);
+
+A = scanf();
+B = scanf();
+A++;
+C = A+B;
+printf(C);
+
+A = scanf();
+B = scanf();
+C = abs(A+B);
+printf(C);
