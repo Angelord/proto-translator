@@ -1,6 +1,8 @@
 ﻿
 // Initialize the counter
 
+someString = "test String hahah ";
+
 counter = 0;
 increment = 1.5;
 test2 = .56;

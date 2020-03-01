@@ -45,6 +45,7 @@
     <Compile Include="Lexer\Scanners\RelationalOperatorTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\ITokenScanner.cs" />
     <Compile Include="Lexer\Pointer.cs" />
+    <Compile Include="Lexer\Scanners\StringTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\WordTokenScanner.cs" />
     <Compile Include="Lexer\Tag.cs" />
     <Compile Include="Lexer\Token.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Lexer\Tokens\RelationalToken.cs" />
     <Compile Include="Lexer\Tokens\MiscToken.cs" />
     <Compile Include="Lexer\Tokens\IntegerToken.cs" />
+    <Compile Include="Lexer\Tokens\StringToken.cs" />
     <Compile Include="Lexer\Tokens\WordToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

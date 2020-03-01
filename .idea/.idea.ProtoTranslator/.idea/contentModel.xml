@@ -14,6 +14,7 @@
             <e p="ITokenScanner.cs" t="Include" />
             <e p="NumericTokenScanner.cs" t="Include" />
             <e p="RelationalOperatorTokenScanner.cs" t="Include" />
+            <e p="StringTokenScanner.cs" t="Include" />
             <e p="WordTokenScanner.cs" t="Include" />
           </e>
           <e p="Tag.cs" t="Include" />
@@ -23,6 +24,7 @@
             <e p="IntegerToken.cs" t="Include" />
             <e p="MiscToken.cs" t="Include" />
             <e p="RelationalToken.cs" t="Include" />
+            <e p="StringToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
           </e>
         </e>
