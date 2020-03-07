@@ -37,7 +37,8 @@ namespace ProtoTranslator.Lexer {
             foreach (ITokenScanner tokenScanner in scanners) {
 
                 if (tokenScanner.TryScan(pointer, out Token token)) {
-                    logger.LogSpace(token);
+                    logger.Log(token.ToString() + (pointer.Next == '\n' ? '\n' : ' '));
+                    token.Line = pointer.Lines;
                     return token;
                 }
             }

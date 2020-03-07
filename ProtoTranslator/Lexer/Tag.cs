@@ -5,7 +5,9 @@
         Id,
         String,
         Keyword,
+        Type,
+        Function,
         Relational,
-        Misc,
+        Misc
     }
 }

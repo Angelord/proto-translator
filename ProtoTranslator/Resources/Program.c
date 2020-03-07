@@ -1,14 +1,15 @@
 ﻿
 // Initialize the counter
 
-A = scanf();
+a = scanf();
 
-B = scanf();
+b = scanf();
 
-if(B == 5) {
-    printf(A);
+absVal = abs(a - b);
+
+if(absVal == 0) {
+    printf(1);
 }
-
-C = (A*A + B*B)*2;
-
-printf(C);
+else {
+    printf(0);
+}

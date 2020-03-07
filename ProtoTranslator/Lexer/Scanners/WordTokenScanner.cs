@@ -1,29 +1,34 @@
 ﻿
+using System;
 using System.Text;
 using System.Collections.Generic;
 using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer.Scanners {
     /// <summary>
-    /// Recognizes Language keywords and Identifiers.
+    /// Recognizes Language keywords, types, built-in functions and Identifiers.
     /// </summary>
     public class WordTokenScanner : ITokenScanner {
 
         private readonly Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
 
-        private static readonly string[] Keywords = {
-            "if",
-            "else",
-            "while",
-            "break",
-            "continue",
-            "return"
-        };
-        
         public WordTokenScanner() {
-            foreach (string keyword in Keywords) {
-                ReserveWord(new WordToken(Tag.Keyword, keyword));
-            }
+            ReserveWord(new WordToken(Tag.Keyword, "if"));
+            ReserveWord(new WordToken(Tag.Keyword, "else"));
+            ReserveWord(new WordToken(Tag.Keyword, "while"));
+            ReserveWord(new WordToken(Tag.Keyword, "break"));
+            ReserveWord(new WordToken(Tag.Keyword, "continue"));
+            ReserveWord(new WordToken(Tag.Keyword, "return"));
+            ReserveWord(new WordToken(Tag.Type, "int"));
+            ReserveWord(new WordToken(Tag.Type, "bool"));
+            ReserveWord(new WordToken(Tag.Type, "char"));
+            // Missing * and pchar
+            ReserveWord(new WordToken(Tag.Function, "abs"));
+            ReserveWord(new WordToken(Tag.Function, "sqr"));
+            ReserveWord(new WordToken(Tag.Function, "odd"));
+            ReserveWord(new WordToken(Tag.Function, "ord"));
+            ReserveWord(new WordToken(Tag.Function, "scanf"));
+            ReserveWord(new WordToken(Tag.Function, "printf"));
         }
 
         public bool TryScan(Pointer pointer, out Token token) {
