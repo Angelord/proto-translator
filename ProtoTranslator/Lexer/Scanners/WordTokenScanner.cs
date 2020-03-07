@@ -23,12 +23,12 @@ namespace ProtoTranslator.Lexer.Scanners {
             ReserveWord(new WordToken(Tag.Type, "bool"));
             ReserveWord(new WordToken(Tag.Type, "char"));
             // Missing * and pchar
-            ReserveWord(new WordToken(Tag.Function, "abs"));
-            ReserveWord(new WordToken(Tag.Function, "sqr"));
-            ReserveWord(new WordToken(Tag.Function, "odd"));
-            ReserveWord(new WordToken(Tag.Function, "ord"));
-            ReserveWord(new WordToken(Tag.Function, "scanf"));
-            ReserveWord(new WordToken(Tag.Function, "printf"));
+            ReserveWord(new WordToken(Tag.Id, "abs"));
+            ReserveWord(new WordToken(Tag.Id, "sqr"));
+            ReserveWord(new WordToken(Tag.Id, "odd"));
+            ReserveWord(new WordToken(Tag.Id, "ord"));
+            ReserveWord(new WordToken(Tag.Id, "scanf"));
+            ReserveWord(new WordToken(Tag.Id, "printf"));
         }
 
         public bool TryScan(Pointer pointer, out Token token) {

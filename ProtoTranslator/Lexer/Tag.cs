@@ -6,7 +6,6 @@
         String,
         Keyword,
         Type,
-        Function,
         Operator,
         Misc
     }
