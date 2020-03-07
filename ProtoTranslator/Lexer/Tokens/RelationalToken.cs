@@ -4,7 +4,7 @@
         public readonly string OpString;
 
         public RelationalToken(string opString) : base(Tag.Relational) {
-            this.OpString = opString;
+            OpString = opString;
         }
 
         public override string ToString() {

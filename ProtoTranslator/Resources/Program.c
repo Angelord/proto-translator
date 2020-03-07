@@ -1,15 +1,14 @@
 ﻿
 // Initialize the counter
 
-someString = "test String hahah ";
+A = scanf();
 
-counter = 0;
-increment = 1.5;
-test2 = .56;
-counter = counter + increment;
+B = scanf();
 
-test = true;
+if(B == 5) {
+    printf(A);
+}
 
-if(counter >= increment) { }
+C = (A*A + B*B)*2;
 
-if(increment != counter) { }
+printf(C);

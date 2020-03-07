@@ -1,16 +1,24 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
+using ProtoTranslator.Debug;
 using ProtoTranslator.Lexer.Scanners;
 
 namespace ProtoTranslator.Lexer {
-    public class LexicalAnalyser {
+    public class LexicalAnalyser : IDisposable {
         
         private readonly List<ITokenScanner> scanners;
-        private StreamReader fileStream;
-        private Pointer pointer;
+        private readonly StreamReader fileStream;
+        private readonly Pointer pointer;
+        private readonly Logger logger;
         
-        public LexicalAnalyser() {
+        public LexicalAnalyser(string filepath, Logger logger) {
+
+            this.logger = logger;
             
+            fileStream = new StreamReader(filepath);
+            pointer = new Pointer(fileStream);
+
             scanners = new List<ITokenScanner>() {
                 new NumericTokenScanner(),
                 new StringTokenScanner(),
@@ -20,26 +28,7 @@ namespace ProtoTranslator.Lexer {
             };
         }
 
-        public List<Token> Scan(string filepath) {
-            List<Token> result = new List<Token>();
-            
-            fileStream = new StreamReader(filepath);
-            using (fileStream) {
-                
-                pointer = new Pointer(fileStream);
-
-                Token token = ScanToken();
-
-                while (token != null) {
-                    result.Add(token);
-                    token = ScanToken();
-                }
-            }
-
-            return result;
-        }
-
-        private Token ScanToken() {
+        public Token ScanToken() {
             
             SkipWhitespace();
             
@@ -48,6 +37,7 @@ namespace ProtoTranslator.Lexer {
             foreach (ITokenScanner tokenScanner in scanners) {
 
                 if (tokenScanner.TryScan(pointer, out Token token)) {
+                    logger.LogSpace(token);
                     return token;
                 }
             }
@@ -89,6 +79,10 @@ namespace ProtoTranslator.Lexer {
                     return;
                 }
             }
+        }
+
+        public void Dispose() {
+            fileStream?.Dispose();
         }
     }
 }

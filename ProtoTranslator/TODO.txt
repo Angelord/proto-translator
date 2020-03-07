@@ -1,0 +1,54 @@
+﻿Rework Tokens?
+
+Logger
+    
+Generator
+
+
+Parser Notes :
+
+
+ int b = 5;
+ 
+ 
+ 
+ 
+ b = a + 5 + 3;
+ 
+ stack
+ 
+ push(id b)
+ 
+ if(=)
+    pop last
+    scan 
+        push(id a)
+        pop a
+        push (literal 5)
+        pop 5
+        push (new Op('+', a, 5))
+            pop Op expr
+            push (literal 3)
+            pop 3
+            push(new Op('+'), Op expr, 3)
+    pop next
+        
+    push(new Assignment(last, next))
+ 
+ 
+ 
+ 
+ parseExpr() 
+    if next is =
+        return new Assignment();
+ 
+
+(a + 5 + 2) > 3
+Match('(')
+Expression nested = ScanExpression();
+Match(')')        
+return new Brackets(nested);
+
+
+Brackets : Expression
+        

@@ -4,38 +4,20 @@ using System.Collections.Generic;
 using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer.Scanners {
+    /// <summary>
+    /// Recognizes Language keywords and Identifiers.
+    /// </summary>
     public class WordTokenScanner : ITokenScanner {
 
         private readonly Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
 
         private static readonly string[] Keywords = {
-            "typedef",
-            "static",
-            "void",
-            "char",
-            "bool",
-            "short",
-            "int",
-            "long",
-            "double",
-            "signed",
-            "unsigned",
-            "struct",
-            "union",
-            "enum",
-            "case",
-            "default",
             "if",
             "else",
-            "switch",
             "while",
-            "do",
-            "for",
-            "continue",
             "break",
-            "return",
-            "true",
-            "false"
+            "continue",
+            "return"
         };
         
         public WordTokenScanner() {

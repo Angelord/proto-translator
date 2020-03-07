@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ProtoTranslator.Debug;
 using ProtoTranslator.Lexer;
+using ProtoTranslator.Parsing;
 
 namespace ProtoTranslator {
     internal class Program {
         public static void Main(string[] args) {
             
-            Console.WriteLine("Analyzing...");
+            Logger lexicalLogger = new ConsoleLogger();
             
-            LexicalAnalyser lexer = new LexicalAnalyser();
+            LexicalAnalyser lexer = new LexicalAnalyser("Resources/Program.c", lexicalLogger);
+            
+            using (lexer) {
+                
+                Parser parser = new Parser();
 
-            List<Token> result = lexer.Scan("Resources/Program.c");
-
-            StringBuilder outputBuilder = new StringBuilder();
-            foreach (Token token in result) {
-                outputBuilder.Append(token);
-                outputBuilder.Append(" ");
+                parser.Parse(lexer);
             }
             
-            Console.WriteLine("Result :");
-            Console.WriteLine(outputBuilder.ToString());
+            lexicalLogger.Flush();
         }
     }
 }

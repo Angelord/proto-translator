@@ -38,7 +38,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Debug\Logger.cs" />
+    <Compile Include="Debug\ConsoleLogger.cs" />
     <Compile Include="Environment.cs" />
+    <Compile Include="Generation\CilEmitter.cs" />
     <Compile Include="Lexer\LexicalAnalyser.cs" />
     <Compile Include="Lexer\Scanners\DefaultTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\NumericTokenScanner.cs" />
@@ -55,6 +58,18 @@
     <Compile Include="Lexer\Tokens\IntegerToken.cs" />
     <Compile Include="Lexer\Tokens\StringToken.cs" />
     <Compile Include="Lexer\Tokens\WordToken.cs" />
+    <Compile Include="Parsing\IntermediateCodeBuilder.cs" />
+    <Compile Include="Parsing\Node.cs" />
+    <Compile Include="Parsing\Nodes\Access.cs" />
+    <Compile Include="Parsing\Nodes\Seq.cs" />
+    <Compile Include="Parsing\Nodes\Constant.cs" />
+    <Compile Include="Parsing\Nodes\Expression.cs" />
+    <Compile Include="Parsing\Nodes\For.cs" />
+    <Compile Include="Parsing\Nodes\Id.cs" />
+    <Compile Include="Parsing\Nodes\If.cs" />
+    <Compile Include="Parsing\Nodes\Statement.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Parsing\NodeGenerators\INodeScanner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbol.cs" />
@@ -63,6 +78,9 @@
     <None Include="Resources\Program.c">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
