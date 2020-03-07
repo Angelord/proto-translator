@@ -7,7 +7,11 @@ b = scanf();
 
 absVal = abs(a - b);
 
-if(absVal == 0) {
+if(b != !a && c >= d) {
+    
+}
+
+if(absVal >= 0) {
     printf(1);
 }
 else {

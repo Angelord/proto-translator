@@ -7,7 +7,7 @@
         Keyword,
         Type,
         Function,
-        Relational,
+        Operator,
         Misc
     }
 }

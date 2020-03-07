@@ -30,7 +30,7 @@
             <e p="FloatToken.cs" t="Include" />
             <e p="IntegerToken.cs" t="Include" />
             <e p="MiscToken.cs" t="Include" />
-            <e p="RelationalToken.cs" t="Include" />
+            <e p="OperatorToken.cs" t="Include" />
             <e p="StringToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
           </e>

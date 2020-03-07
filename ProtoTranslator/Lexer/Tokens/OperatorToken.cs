@@ -1,9 +1,9 @@
 ﻿namespace ProtoTranslator.Lexer.Tokens {
-    public class RelationalToken : Token {
+    public class OperatorToken : Token {
         
         public readonly string OpString;
 
-        public RelationalToken(string opString) : base(Tag.Relational) {
+        public OperatorToken(string opString) : base(Tag.Operator) {
             OpString = opString;
         }
 

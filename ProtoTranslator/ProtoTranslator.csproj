@@ -53,7 +53,7 @@
     <Compile Include="Lexer\Tag.cs" />
     <Compile Include="Lexer\Token.cs" />
     <Compile Include="Lexer\Tokens\FloatToken.cs" />
-    <Compile Include="Lexer\Tokens\RelationalToken.cs" />
+    <Compile Include="Lexer\Tokens\OperatorToken.cs" />
     <Compile Include="Lexer\Tokens\MiscToken.cs" />
     <Compile Include="Lexer\Tokens\IntegerToken.cs" />
     <Compile Include="Lexer\Tokens\StringToken.cs" />

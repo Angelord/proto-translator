@@ -1,30 +1,54 @@
-﻿using ProtoTranslator.Lexer.Tokens;
+﻿using System.Linq;
+using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer.Scanners {
     
     public class RelationalOperatorTokenScanner : ITokenScanner {
+
+        private static readonly char[] SingleCharOperators = new[] {
+            '=',
+            '+',
+            '-',
+            '*',
+            '|',
+            '/',
+            '%',
+            '&',
+            '~',
+            '<',
+            '>',
+            '!'
+        };
+        
+        private static readonly string[] MultiCharOperators = new[] {
+            "+=",
+            "-=",
+            "*=",
+            "/=",
+            "%=",
+            "++",
+            "--",
+            "<=",
+            "!=",
+            ">=",
+            "==",
+            "||",
+            "&&",
+        };
         
         public bool TryScan(Pointer pointer, out Token token) {
-            
-            if (pointer.Current == '<' || 
-                pointer.Current == '>' || 
-                pointer.Current == '!' || 
-                pointer.Current == '=' && pointer.Next == '=') {
-                
-                string opString;
 
-                if (pointer.Next == '=') {
-                    opString = pointer.Select(2);
-                    pointer.Move();
-                }
-                else {
-                    opString = pointer.Current.ToString();
-                }
-
+            string nextTwo = pointer.Select(2);
+            if(MultiCharOperators.Contains(nextTwo)) {
+                token = new OperatorToken(nextTwo);
                 pointer.Move();
-
-                token = new RelationalToken(opString);
-                
+                pointer.Move();
+                return true;
+            }
+            
+            if (SingleCharOperators.Contains(pointer.Current)) {
+                token = new OperatorToken(pointer.Current.ToString());
+                pointer.Move();
                 return true;
             }
 

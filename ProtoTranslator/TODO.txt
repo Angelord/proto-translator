@@ -1,7 +1,9 @@
-﻿Rework Tokens?
-
-Logger
+﻿
+Logger - DONE
     
+Lexer
+    SpecialSymbols
+
 Generator
 
 
