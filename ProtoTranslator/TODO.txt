@@ -1,19 +1,23 @@
 ﻿
-Logger - DONE
++ Logger
     
-Lexer
-    SpecialSymbols
++ Lexer
 
-Generator
+- Parser
+    - Nodes
 
++ Generator
+    + Research ilGenerator
+
+Arrays
+
+Syntax Checks
+    - Has main method
+    - Types
 
 Parser Notes :
 
-
  int b = 5;
- 
- 
- 
  
  b = a + 5 + 3;
  

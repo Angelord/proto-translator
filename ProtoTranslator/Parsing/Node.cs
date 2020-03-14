@@ -1,4 +1,6 @@
-﻿namespace ProtoTranslator.Parsing {
+﻿using ProtoTranslator.Generation;
+
+namespace ProtoTranslator.Parsing {
     public abstract class Node {
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using ProtoTranslator.Lexer;
 using ProtoTranslator.Lexer.Tokens;
+using ProtoTranslator.Parsing.Nodes;
 
 namespace ProtoTranslator.Parsing {
     public class Parser {

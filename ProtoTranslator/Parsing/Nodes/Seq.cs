@@ -1,4 +1,6 @@
-﻿namespace ProtoTranslator.Parsing {
+﻿using ProtoTranslator.Generation;
+
+namespace ProtoTranslator.Parsing.Nodes {
     public class Seq : Statement {
 
         private readonly Statement first;
@@ -9,7 +11,7 @@
             this.second = second;
         }
 
-        public override void Generate(IntermediateCodeBuilder builder) {
+        public override void Generate(CilEmitter builder) {
             
             first.Generate(builder); 
             

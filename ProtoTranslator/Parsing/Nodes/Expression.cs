@@ -1,8 +1,15 @@
-﻿namespace ProtoTranslator.Parsing {
+﻿using System;
+using ProtoTranslator.Generation;
+
+namespace ProtoTranslator.Parsing.Nodes {
     public abstract class Expression : Node {
 
-        public abstract Expression GenerateLValue(IntermediateCodeBuilder builder);
+        public abstract Type DetermineType();
+        
+        public abstract Expression GetLValue(CilEmitter builder);
 
-        public abstract Expression GenerateRValue(IntermediateCodeBuilder builder);
+        public abstract Expression GetRValue(CilEmitter builder);
+        
+        public abstract void Push(CilEmitter emitter);
     }
 }

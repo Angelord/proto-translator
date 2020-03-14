@@ -1,4 +1,7 @@
-﻿namespace ProtoTranslator.Parsing {
+﻿using ProtoTranslator.Generation;
+using ProtoTranslator.Parsing.Nodes;
+
+namespace ProtoTranslator.Parsing {
     public class For : Statement {
 
         private readonly Expression definition;
@@ -14,22 +17,22 @@
             this.increment = increment;
             this.statement = statement;
 
-            beginLabel = GenerateLabelName();
-            afterLabel = GenerateLabelName();
+//            beginLabel = GenerateLabelName();
+//            afterLabel = GenerateLabelName();
         }
 
-        public override void Generate(IntermediateCodeBuilder builder) {
-            Expression conditionRVal = condition.GenerateRValue(builder);
-            
-            definition.GenerateRValue(builder);
-            builder.Append(beginLabel);
-            builder.Append($"ifFalse {conditionRVal} goto {afterLabel}");
-            increment.GenerateRValue(builder);
-            
-            statement.Generate(builder);
-            
-            builder.Append($"goto {beginLabel}");
-            builder.Append(afterLabel);
+        public override void Generate(CilEmitter builder) {
+//            Expression conditionRVal = condition.GenerateRValue(builder);
+//            
+//            definition.GenerateRValue(builder);
+//            builder.Append(beginLabel);
+//            builder.Append($"ifFalse {conditionRVal} goto {afterLabel}");
+//            increment.GenerateRValue(builder);
+//            
+//            statement.Generate(builder);
+//            
+//            builder.Append($"goto {beginLabel}");
+//            builder.Append(afterLabel);
         }
     }
 }
