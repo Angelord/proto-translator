@@ -1,4 +1,8 @@
 ﻿
+- Remove obsolete Classes (Arr Access etc...)
+    - Implement IDs
+        - Test with manual node tree generation
+
 + Logger
     
 + Lexer

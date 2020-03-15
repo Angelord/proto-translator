@@ -2,7 +2,7 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class StringNode : Literal {
+    public class StringNode : LiteralNode {
 
         private readonly string value;
 

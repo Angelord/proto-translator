@@ -52,15 +52,15 @@
             <e p="INodeScanner.cs" t="Include" />
           </e>
           <e p="Nodes" t="Include">
-            <e p="Access.cs" t="Include" />
             <e p="BoolNode.cs" t="Include" />
             <e p="Expression.cs" t="Include" />
             <e p="For.cs" t="Include" />
             <e p="Id.cs" t="Include" />
-            <e p="If.cs" t="Include" />
+            <e p="IfNode.cs" t="Include" />
             <e p="IntegerNode.cs" t="Include" />
-            <e p="Literal.cs" t="Include" />
+            <e p="LiteralNode.cs" t="Include" />
             <e p="PrintNode.cs" t="Include" />
+            <e p="ScanNode.cs" t="Include" />
             <e p="Seq.cs" t="Include" />
             <e p="Statement.cs" t="Include" />
             <e p="StringNode.cs" t="Include" />

@@ -2,7 +2,7 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class BoolNode : Literal {
+    public class BoolNode : LiteralNode {
 
         private readonly bool value;
 

@@ -2,12 +2,12 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class If : Statement {
+    public class IfNode : Statement {
 
         private readonly Expression condition;
         private readonly Statement statement;
         
-        public If(Expression condition, Statement statement) {
+        public IfNode(Expression condition, Statement statement) {
             this.condition = condition;
             this.statement = statement;
         }

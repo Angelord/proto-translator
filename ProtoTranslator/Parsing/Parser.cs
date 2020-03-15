@@ -50,7 +50,7 @@ namespace ProtoTranslator.Parsing {
                     Match(Tag.Misc, '{');
                     Statement stmt = ParseToken() as Statement;
                     Match(Tag.Misc, '}');
-                    return new If(cond , stmt);
+                    return new IfNode(cond , stmt);
             }
 
             return null;
