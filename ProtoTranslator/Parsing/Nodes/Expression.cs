@@ -6,9 +6,9 @@ namespace ProtoTranslator.Parsing.Nodes {
 
         public abstract Type DetermineType();
         
-        public abstract Expression GetLValue(CilEmitter builder);
+        public abstract Expression GetLValue(CilEmitter emitter);
 
-        public abstract Expression GetRValue(CilEmitter builder);
+        public abstract Expression GetRValue(CilEmitter emitter);
         
         public abstract void Push(CilEmitter emitter);
     }

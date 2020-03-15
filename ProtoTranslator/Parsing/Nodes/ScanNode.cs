@@ -11,11 +11,11 @@ namespace ProtoTranslator.Parsing.Nodes {
             return typeof(string);
         }
 
-        public override Expression GetLValue(CilEmitter builder) {
+        public override Expression GetLValue(CilEmitter emitter) {
             throw new InvalidOperationException();
         }
 
-        public override Expression GetRValue(CilEmitter builder) {
+        public override Expression GetRValue(CilEmitter emitter) {
             return this;
         }
 

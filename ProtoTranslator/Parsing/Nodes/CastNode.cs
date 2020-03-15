@@ -2,16 +2,16 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class ParseNode : Expression {
+    public class CastNode : Expression {
 
         private readonly Type targetType;
-        private readonly Expression exprToParse;
-
-        public ParseNode(Type targetType, Expression exprToParse) {
+        private readonly Expression expressionToCast;
+        
+        public CastNode(Type targetType, Expression expressionToCast) {
             this.targetType = targetType;
-            this.exprToParse = exprToParse;
+            this.expressionToCast = expressionToCast;
         }
-
+        
         public override Type DetermineType() {
             return targetType;
         }
@@ -26,15 +26,10 @@ namespace ProtoTranslator.Parsing.Nodes {
         }
 
         public override void Push(CilEmitter emitter) {
-            Expression exprRValue = exprToParse.GetRValue(emitter);
-
-            if (exprRValue.DetermineType() != typeof(string)) {
-                // TODO : Throw custom exception
-                throw new InvalidOperationException("Invalid parse! The target expression is not of type string!");
-            }
+            Expression exprRValue = expressionToCast.GetRValue(emitter);
 
             exprRValue.Push(emitter);
-            emitter.EmitParse(targetType);
+            emitter.EmitCast(targetType, exprRValue.DetermineType());
         }
     }
 }

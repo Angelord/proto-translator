@@ -40,12 +40,12 @@ namespace ProtoTranslator {
 
             emitter.BeginMain();
             
-            Statement root = new Seq(
+            Statement root = new SeqNode(
                 new IfNode(
                     new ParseNode(typeof(bool), new StringNode("false")), 
                     new PrintNode(new StringNode("Is True"))
                 ),
-                new Seq(
+                new SeqNode(
                     new PrintNode(new ScanNode()), 
                     new PrintNode(new StringNode("End"))
                 )
