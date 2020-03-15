@@ -42,7 +42,7 @@ namespace ProtoTranslator {
             
             Statement root = new Seq(
                 new IfNode(
-                    new BoolNode(true),
+                    new ParseNode(typeof(bool), new StringNode("false")), 
                     new PrintNode(new StringNode("Is True"))
                 ),
                 new Seq(

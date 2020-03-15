@@ -59,6 +59,7 @@
             <e p="IfNode.cs" t="Include" />
             <e p="IntegerNode.cs" t="Include" />
             <e p="LiteralNode.cs" t="Include" />
+            <e p="ParseNode.cs" t="Include" />
             <e p="PrintNode.cs" t="Include" />
             <e p="ScanNode.cs" t="Include" />
             <e p="Seq.cs" t="Include" />

@@ -62,6 +62,7 @@
     <Compile Include="Parsing\Node.cs" />
     <Compile Include="Parsing\Nodes\BoolNode.cs" />
     <Compile Include="Parsing\Nodes\LiteralNode.cs" />
+    <Compile Include="Parsing\Nodes\ParseNode.cs" />
     <Compile Include="Parsing\Nodes\PrintNode.cs" />
     <Compile Include="Parsing\Nodes\ScanNode.cs" />
     <Compile Include="Parsing\Nodes\Seq.cs" />
