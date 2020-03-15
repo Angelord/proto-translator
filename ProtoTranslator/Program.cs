@@ -42,7 +42,7 @@ namespace ProtoTranslator {
             
             Statement root = new Stmt_Seq(
                 new Stmt_If(
-                    new Expr_Parse(typeof(bool), new Literal_String("false")), 
+                    new Expr_Comparison(">", new Literal_Integer(-10), new Literal_Integer(5)), 
                     new Stmt_Print(new Literal_String("Is True"))
                 ),
                 new Stmt_Seq(
