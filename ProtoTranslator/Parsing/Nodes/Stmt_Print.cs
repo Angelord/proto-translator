@@ -4,11 +4,11 @@ namespace ProtoTranslator.Parsing.Nodes {
     /// <summary>
     /// Represents a call to printf
     /// </summary>
-    public class PrintNode : Statement {
+    public class Stmt_Print : Statement {
 
         private readonly Expression valExpr;
         
-        public PrintNode(Expression valExpr) {
+        public Stmt_Print(Expression valExpr) {
             this.valExpr = valExpr;
         }
 

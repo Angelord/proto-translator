@@ -52,22 +52,26 @@
             <e p="INodeScanner.cs" t="Include" />
           </e>
           <e p="Nodes" t="Include">
-            <e p="CastNode.cs" t="Include" />
             <e p="Expression.cs" t="Include" />
-            <e p="For.cs" t="Include" />
-            <e p="Id.cs" t="Include" />
-            <e p="IfNode.cs" t="Include" />
-            <e p="LiteralNode.cs" t="Include" />
-            <e p="Literals" t="Include">
-              <e p="BoolNode.cs" t="Include" />
-              <e p="IntegerNode.cs" t="Include" />
-              <e p="StringNode.cs" t="Include" />
+            <e p="Expressions" t="Include">
+              <e p="ComparisonExpr.cs" t="Include" />
+              <e p="Expr_Cast.cs" t="Include" />
+              <e p="LiteralExpr.cs" t="Include" />
+              <e p="ParseExpr.cs" t="Include" />
+              <e p="ScanExpr.cs" t="Include" />
             </e>
-            <e p="ParseNode.cs" t="Include" />
-            <e p="PrintNode.cs" t="Include" />
-            <e p="ScanNode.cs" t="Include" />
-            <e p="SeqNode.cs" t="Include" />
+            <e p="Literals" t="Include">
+              <e p="BoolExpr.cs" t="Include" />
+              <e p="IntegerExpr.cs" t="Include" />
+              <e p="StringExpr.cs" t="Include" />
+            </e>
             <e p="Statement.cs" t="Include" />
+            <e p="Statements" t="Include">
+              <e p="ForStmt.cs" t="Include" />
+              <e p="IfStmt.cs" t="Include" />
+              <e p="PrintStmt.cs" t="Include" />
+              <e p="SeqStmt.cs" t="Include" />
+            </e>
           </e>
           <e p="Parser.cs" t="Include" />
         </e>

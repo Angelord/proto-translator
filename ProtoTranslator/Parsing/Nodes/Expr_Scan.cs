@@ -5,7 +5,7 @@ namespace ProtoTranslator.Parsing.Nodes {
     /// <summary>
     /// Represents a call to scanf
     /// </summary>
-    public class ScanNode : Expression {
+    public class Expr_Scan : Expression {
         
         public override Type DetermineType() {
             return typeof(string);

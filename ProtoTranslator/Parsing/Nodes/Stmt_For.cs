@@ -2,7 +2,7 @@
 using ProtoTranslator.Parsing.Nodes;
 
 namespace ProtoTranslator.Parsing {
-    public class For : Statement {
+    public class Stmt_For : Statement {
 
         private readonly Expression definition;
         private readonly Expression condition;
@@ -11,7 +11,7 @@ namespace ProtoTranslator.Parsing {
         private readonly string beginLabel;
         private readonly string afterLabel;
         
-        public For(Expression definition, Expression condition, Expression increment, Statement statement) {
+        public Stmt_For(Expression definition, Expression condition, Expression increment, Statement statement) {
             this.definition = definition;
             this.condition = condition;
             this.increment = increment;

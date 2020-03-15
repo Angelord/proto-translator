@@ -2,11 +2,11 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class StringNode : LiteralNode {
+    public class Literal_String : Expr_Literal {
 
         private readonly string value;
 
-        public StringNode(string value) {
+        public Literal_String(string value) {
             this.value = value;
         }
 

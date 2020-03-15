@@ -2,12 +2,12 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class ParseNode : Expression {
+    public class Expr_Parse : Expression {
 
         private readonly Type targetType;
         private readonly Expression exprToParse;
 
-        public ParseNode(Type targetType, Expression exprToParse) {
+        public Expr_Parse(Type targetType, Expression exprToParse) {
             this.targetType = targetType;
             this.exprToParse = exprToParse;
         }

@@ -2,11 +2,11 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class BoolNode : LiteralNode {
+    public class Literal_Bool : Expr_Literal {
 
         private readonly bool value;
 
-        public BoolNode(bool value) { this.value = value; }
+        public Literal_Bool(bool value) { this.value = value; }
 
         public override Type DetermineType() {
             return typeof(bool);

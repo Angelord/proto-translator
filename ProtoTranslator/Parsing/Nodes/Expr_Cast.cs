@@ -2,12 +2,12 @@
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public class CastNode : Expression {
+    public class Expr_Cast : Expression {
 
         private readonly Type targetType;
         private readonly Expression expressionToCast;
         
-        public CastNode(Type targetType, Expression expressionToCast) {
+        public Expr_Cast(Type targetType, Expression expressionToCast) {
             this.targetType = targetType;
             this.expressionToCast = expressionToCast;
         }

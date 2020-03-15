@@ -1,7 +1,7 @@
 ﻿using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
-    public abstract class LiteralNode : Expression {
+    public abstract class Expr_Literal : Expression {
 
         public override Expression GetLValue(CilEmitter emitter) { return this; }
 
