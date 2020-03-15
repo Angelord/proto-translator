@@ -4,14 +4,14 @@ using ProtoTranslator.Parsing.Nodes;
 namespace ProtoTranslator.Parsing {
     public class Stmt_For : Statement {
 
-        private readonly Expression definition;
+        private readonly Statement definition;
         private readonly Expression condition;
-        private readonly Expression increment;
+        private readonly Statement increment;
         private readonly Statement statement;
         private readonly string beginLabel;
         private readonly string afterLabel;
         
-        public Stmt_For(Expression definition, Expression condition, Expression increment, Statement statement) {
+        public Stmt_For(Statement definition, Expression condition, Statement increment, Statement statement) {
             this.definition = definition;
             this.condition = condition;
             this.increment = increment;

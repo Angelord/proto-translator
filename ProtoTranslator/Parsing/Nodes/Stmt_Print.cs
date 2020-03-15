@@ -14,9 +14,7 @@ namespace ProtoTranslator.Parsing.Nodes {
 
         public override void Generate(CilEmitter emitter) {
             
-            Expression exprRVal = valExpr.GetRValue(emitter);
-
-            exprRVal.Push(emitter);
+            Expression exprRVal = valExpr.EmitRValue(emitter);
             
             emitter.EmitWrite(exprRVal.DetermineType());
         }

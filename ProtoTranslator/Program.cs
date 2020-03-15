@@ -35,7 +35,7 @@ namespace ProtoTranslator {
         }
 
         private static void TestAbstractSyntaxTree() {
-            
+
             CilEmitter emitter = new CilEmitter("GenProgram_ASTTest");
 
             emitter.BeginMain();

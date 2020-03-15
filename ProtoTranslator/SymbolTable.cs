@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 
 namespace ProtoTranslator {
-    public class Environment {
+    public class SymbolTable {
 
-        private Dictionary<string, Symbol> symTable;
-        private Environment prev;
+        private readonly Dictionary<string, Symbol> symTable = new Dictionary<string, Symbol>();
+        private readonly SymbolTable prev;
 
-        public Environment(Environment prev) {
+        public SymbolTable Prev => prev;
+
+        public SymbolTable(SymbolTable prev) {
             this.prev = prev;
         }
 
@@ -15,7 +17,7 @@ namespace ProtoTranslator {
         }
 
         public Symbol Get(string key) {
-            for (Environment env = this; env != null; env = env.prev) {
+            for (SymbolTable env = this; env != null; env = env.prev) {
                 if (env.symTable.TryGetValue(key, out Symbol found)) {
                     return found;
                 }

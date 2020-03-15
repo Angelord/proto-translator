@@ -13,11 +13,9 @@ namespace ProtoTranslator.Parsing.Nodes {
         }
 
         public override void Generate(CilEmitter emitter) {
-            Expression conditionRVal = condition.GetRValue(emitter);
-
             Label afterLabel = emitter.GenerateLabel();
             
-            conditionRVal.GetRValue(emitter).Push(emitter);
+            condition.EmitRValue(emitter);
             emitter.EmitIfFalse(afterLabel);
 
             statement.Generate(emitter);

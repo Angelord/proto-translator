@@ -18,7 +18,6 @@
           <e p="ConsoleLogger.cs" t="Include" />
           <e p="Logger.cs" t="Include" />
         </e>
-        <e p="Environment.cs" t="Include" />
         <e p="Generation" t="Include">
           <e p="CilEmitter.cs" t="Include" />
         </e>
@@ -52,15 +51,20 @@
             <e p="INodeScanner.cs" t="Include" />
           </e>
           <e p="Nodes" t="Include">
+            <e p="Expr_Assign.cs" t="Include" />
             <e p="Expr_Cast.cs" t="Include" />
             <e p="Expr_Comparison.cs" t="Include" />
             <e p="Expr_Literal.cs" t="Include" />
+            <e p="Expr_LocalVar.cs" t="Include" />
+            <e p="Expr_LocalVarDeclaration.cs" t="Include" />
             <e p="Expr_Parse.cs" t="Include" />
             <e p="Expr_Scan.cs" t="Include" />
             <e p="Expression.cs" t="Include" />
             <e p="Literal_Bool.cs" t="Include" />
             <e p="Literal_Integer.cs" t="Include" />
             <e p="Literal_String.cs" t="Include" />
+            <e p="LValue.cs" t="Include" />
+            <e p="LValue_LocalVar.cs" t="Include" />
             <e p="Statement.cs" t="Include" />
             <e p="Stmt_For.cs" t="Include" />
             <e p="Stmt_If.cs" t="Include" />
@@ -78,6 +82,7 @@
           <e p="Program.c" t="Include" />
         </e>
         <e p="Symbol.cs" t="Include" />
+        <e p="SymbolTable.cs" t="Include" />
         <e p="TODO.txt" t="Include" />
       </e>
       <e p="ProtoTranslator.sln" t="IncludeFlat" />

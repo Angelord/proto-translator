@@ -11,9 +11,10 @@ namespace ProtoTranslator.Parsing.Nodes {
         public override Type DetermineType() {
             return typeof(bool);
         }
-
-        public override void Push(CilEmitter emitter) {
+        
+        public override Expression EmitRValue(CilEmitter emitter) {
             emitter.EmitInt32(value);
+            return this;
         }
     }
 }

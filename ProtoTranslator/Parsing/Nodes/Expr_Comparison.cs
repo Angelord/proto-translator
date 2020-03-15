@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
@@ -20,24 +21,18 @@ namespace ProtoTranslator.Parsing.Nodes {
             return typeof(bool);
         }
 
-        public override Expression GetLValue(CilEmitter emitter) {
+        public override LValue GetLValue(CilEmitter emitter) {
             // TODO : Use custom exception type
             throw new InvalidOperationException("Invalid LValue reference.");
         }
 
-        public override Expression GetRValue(CilEmitter emitter) {
-            return this;
-        }
-        
-        public override void Push(CilEmitter emitter) {
-
-            Expression lhsRVal = lhs.GetRValue(emitter);
-            Expression rhsRVal = rhs.GetRValue(emitter);
-            
-            lhsRVal.Push(emitter);
-            rhsRVal.Push(emitter);
+        public override Expression EmitRValue(CilEmitter emitter) {
+            lhs.EmitRValue(emitter);
+            rhs.EmitRValue(emitter);
             
             emitter.EmitComparison(comparisonOp);
+            
+            return this;
         }
     }
 }

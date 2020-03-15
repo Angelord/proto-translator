@@ -12,8 +12,9 @@ namespace ProtoTranslator.Parsing.Nodes {
             return typeof(bool);
         }
 
-        public override void Push(CilEmitter emitter) {
+        public override Expression EmitRValue(CilEmitter emitter) {
             emitter.EmitBool(value);
+            return this;
         }
     }
 }

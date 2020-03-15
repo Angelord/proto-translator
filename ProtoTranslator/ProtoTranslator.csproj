@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Debug\Logger.cs" />
     <Compile Include="Debug\ConsoleLogger.cs" />
-    <Compile Include="Environment.cs" />
+    <Compile Include="SymbolTable.cs" />
     <Compile Include="GenerationTester.cs" />
     <Compile Include="Generation\CilEmitter.cs" />
     <Compile Include="Lexer\LexicalAnalyser.cs" />
@@ -64,12 +64,17 @@
     <Compile Include="Parsing\Nodes\Expr_Cast.cs" />
     <Compile Include="Parsing\Nodes\Expr_Comparison.cs" />
     <Compile Include="Parsing\Nodes\Expr_Literal.cs" />
+    <Compile Include="Parsing\Nodes\Expr_LocalVar.cs" />
+    <Compile Include="Parsing\Nodes\Expr_LocalVarDeclaration.cs" />
     <Compile Include="Parsing\Nodes\Expr_Parse.cs" />
     <Compile Include="Parsing\Nodes\Expr_Scan.cs" />
     <Compile Include="Parsing\Nodes\Literal_Bool.cs" />
     <Compile Include="Parsing\Nodes\Literal_Integer.cs" />
     <Compile Include="Parsing\Nodes\Literal_String.cs" />
+    <Compile Include="Parsing\Nodes\LValue.cs" />
+    <Compile Include="Parsing\Nodes\LValue_LocalVar.cs" />
     <Compile Include="Parsing\Nodes\Statement.cs" />
+    <Compile Include="Parsing\Nodes\Expr_Assign.cs" />
     <Compile Include="Parsing\Nodes\Stmt_For.cs" />
     <Compile Include="Parsing\Nodes\Stmt_If.cs" />
     <Compile Include="Parsing\Nodes\Stmt_Print.cs" />
