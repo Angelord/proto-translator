@@ -41,6 +41,7 @@
     <Compile Include="Debug\Logger.cs" />
     <Compile Include="Debug\ConsoleLogger.cs" />
     <Compile Include="Keywords.cs" />
+    <Compile Include="Lexer\Tokens\TypeToken.cs" />
     <Compile Include="Parsing\Exceptions\ParseException.cs" />
     <Compile Include="SymbolTables\LocalVariableSymbol.cs" />
     <Compile Include="SymbolTables\Symbol.cs" />
@@ -51,7 +52,7 @@
     <Compile Include="Lexer\LexicalAnalyser.cs" />
     <Compile Include="Lexer\Scanners\DefaultTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\NumericTokenScanner.cs" />
-    <Compile Include="Lexer\Scanners\RelationalOperatorTokenScanner.cs" />
+    <Compile Include="Lexer\Scanners\OperatorTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\ITokenScanner.cs" />
     <Compile Include="Lexer\Pointer.cs" />
     <Compile Include="Lexer\Scanners\StringTokenScanner.cs" />

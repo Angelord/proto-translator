@@ -3,7 +3,7 @@
 
         public readonly int Value;
         
-        public IntegerToken(int value) : base(Tag.Integer) {
+        public IntegerToken(int value) : base(Tag.Number) {
             Value = value;
         }
         

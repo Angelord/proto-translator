@@ -23,7 +23,7 @@ namespace ProtoTranslator.Lexer {
                 new NumericTokenScanner(),
                 new StringTokenScanner(),
                 new WordTokenScanner(),
-                new RelationalOperatorTokenScanner(),
+                new OperatorTokenScanner(),
                 new DefaultTokenScanner()
             };
         }

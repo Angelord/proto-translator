@@ -31,7 +31,7 @@
             <e p="DefaultTokenScanner.cs" t="Include" />
             <e p="ITokenScanner.cs" t="Include" />
             <e p="NumericTokenScanner.cs" t="Include" />
-            <e p="RelationalOperatorTokenScanner.cs" t="Include" />
+            <e p="OperatorTokenScanner.cs" t="Include" />
             <e p="StringTokenScanner.cs" t="Include" />
             <e p="WordTokenScanner.cs" t="Include" />
           </e>
@@ -43,6 +43,7 @@
             <e p="MiscToken.cs" t="Include" />
             <e p="OperatorToken.cs" t="Include" />
             <e p="StringToken.cs" t="Include" />
+            <e p="TypeToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
           </e>
         </e>

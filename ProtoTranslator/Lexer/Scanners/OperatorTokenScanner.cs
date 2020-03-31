@@ -3,7 +3,7 @@ using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer.Scanners {
     
-    public class RelationalOperatorTokenScanner : ITokenScanner {
+    public class OperatorTokenScanner : ITokenScanner {
 
         private static readonly char[] SingleCharOperators = new[] {
             '=',

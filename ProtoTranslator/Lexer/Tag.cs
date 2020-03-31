@@ -1,12 +1,22 @@
 ﻿namespace ProtoTranslator.Lexer {
     public enum Tag {
-        Integer,
+        Number,
         Float,
-        Id,
         String,
-        Keyword,
-        Type,
+        Id,
         Operator,
+        
+        BasicType,
+        
+        True,
+        False,
+        
+        If,
+        Else,
+        Do,
+        While,
+        Break,
+
         Misc
     }
 }
