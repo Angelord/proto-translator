@@ -32,8 +32,12 @@ namespace ProtoTranslator.Parsing {
         }
 
         private void Program() {
-//            Statement stmt = Block();
-            
+            Statement stmt = Block();
+//            MatCh
+        }
+
+        private Statement Block() {
+            throw new NotImplementedException();
         }
 
         private void ParseStatement() {
@@ -47,7 +51,7 @@ namespace ProtoTranslator.Parsing {
                 ParseIdStatement();
             }
             
-            MatchMisc(';');
+            Match(';');
         }
 
         private void ParseKeywordStatement() {
@@ -62,12 +66,12 @@ namespace ProtoTranslator.Parsing {
         
         private void ParseIf() {
             MatchWord(Keywords.If);
-            MatchMisc('(');
+            Match('(');
             // Expression
-            MatchMisc(')');
-            MatchMisc('{');
+            Match(')');
+            Match('{');
             ParseStatement();
-            MatchMisc('}');
+            Match('}');
         }
 
         private void ParseWhile() {
@@ -144,7 +148,7 @@ namespace ProtoTranslator.Parsing {
             
             Move();
             if (lookaheadToken.Tag == Tag.Misc) {
-                MatchMisc(';');
+                Match(';');
             }
             else if(lookaheadToken.Tag == Tag.Operator) {
                 // TODO : Handle assignment
@@ -174,7 +178,7 @@ namespace ProtoTranslator.Parsing {
             return nextToken as T;
         }
 
-        private void MatchMisc(char value) {
+        private void Match(char value) {
             MiscToken misc = lookaheadToken as MiscToken;
 
             if (misc == null || misc.Symbol != value) {
