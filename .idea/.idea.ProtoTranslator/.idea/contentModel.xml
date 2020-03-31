@@ -13,6 +13,7 @@
       </e>
       <e p="packages" t="ExcludeRecursive" />
       <e p="ProtoTranslator" t="IncludeRecursive">
+        <e p="_Scraps.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Debug" t="Include">
           <e p="ConsoleLogger.cs" t="Include" />
@@ -22,6 +23,7 @@
           <e p="CilEmitter.cs" t="Include" />
         </e>
         <e p="GenerationTester.cs" t="Include" />
+        <e p="Keywords.cs" t="Include" />
         <e p="Lexer" t="Include">
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
@@ -46,6 +48,9 @@
         </e>
         <e p="obj" t="ExcludeRecursive" />
         <e p="Parsing" t="Include">
+          <e p="Exceptions" t="Include">
+            <e p="ParseException.cs" t="Include" />
+          </e>
           <e p="Node.cs" t="Include" />
           <e p="NodeGenerators" t="Include">
             <e p="INodeScanner.cs" t="Include" />
@@ -81,9 +86,14 @@
         <e p="Resources" t="Include">
           <e p="Program.c" t="Include" />
         </e>
-        <e p="Symbol.cs" t="Include" />
-        <e p="SymbolTable.cs" t="Include" />
+        <e p="SymbolTables" t="Include">
+          <e p="LocalVariableSymbol.cs" t="Include" />
+          <e p="Symbol.cs" t="Include" />
+          <e p="SymbolTable.cs" t="Include" />
+        </e>
         <e p="TODO.txt" t="Include" />
+        <e p="Translator.cs" t="Include" />
+        <e p="Types.cs" t="Include" />
       </e>
       <e p="ProtoTranslator.sln" t="IncludeFlat" />
     </e>

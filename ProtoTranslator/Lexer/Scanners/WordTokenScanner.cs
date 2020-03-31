@@ -13,15 +13,15 @@ namespace ProtoTranslator.Lexer.Scanners {
         private readonly Dictionary<string, WordToken> words = new Dictionary<string, WordToken>();
 
         public WordTokenScanner() {
-            ReserveWord(new WordToken(Tag.Keyword, "if"));
-            ReserveWord(new WordToken(Tag.Keyword, "else"));
-            ReserveWord(new WordToken(Tag.Keyword, "while"));
-            ReserveWord(new WordToken(Tag.Keyword, "break"));
-            ReserveWord(new WordToken(Tag.Keyword, "continue"));
-            ReserveWord(new WordToken(Tag.Keyword, "return"));
-            ReserveWord(new WordToken(Tag.Type, "int"));
-            ReserveWord(new WordToken(Tag.Type, "bool"));
-            ReserveWord(new WordToken(Tag.Type, "char"));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.If));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.Else));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.While));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.Break));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.Continue));
+            ReserveWord(new WordToken(Tag.Keyword, Keywords.Return));
+            ReserveWord(new WordToken(Tag.Type, Types.Int));
+            ReserveWord(new WordToken(Tag.Type, Types.Bool));
+            ReserveWord(new WordToken(Tag.Type, Types.Char));
             // Missing * and pchar
             ReserveWord(new WordToken(Tag.Id, "abs"));
             ReserveWord(new WordToken(Tag.Id, "sqr"));

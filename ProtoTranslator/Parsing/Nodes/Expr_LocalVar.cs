@@ -10,19 +10,21 @@ namespace ProtoTranslator.Parsing.Nodes {
             this.identifier = identifier;
         }
 
-        public override Type DetermineType() { return SymTable.Get(identifier).Type; }
+        public override Type DetermineType() { return GetSymbol().Type; }
 
         public override LValue GetLValue(CilEmitter emitter) {
-            return new LValue_LocalVar(SymTable.Get(identifier).LocalVariableInfo);
+            return new LValue_LocalVar(GetSymbol().VariableInfo);
         }
 
         public override Expression EmitRValue(CilEmitter emitter) {
-
-            Symbol varSymbol = SymTable.Get(identifier);
             
-            emitter.EmitLocalVar(varSymbol.LocalVariableInfo);
+            emitter.EmitLocalVar(GetSymbol().VariableInfo);
 
             return this;
+        }
+
+        private LocalVariableSymbol GetSymbol() {
+            return SymTable.Get(identifier) as LocalVariableSymbol;
         }
     }
 }

@@ -17,8 +17,9 @@ namespace ProtoTranslator.Parsing.Nodes {
 
         public override LValue GetLValue(CilEmitter emitter) {
             LocalVariableInfo localVarInfo = emitter.EmitLocalVarDeclaration(identifier, type);
-            SymTable.Put(identifier, new Symbol(type, localVarInfo));
-            return new LValue_LocalVar(SymTable.Get(identifier).LocalVariableInfo);
+            LocalVariableSymbol symbol = new LocalVariableSymbol(type, localVarInfo);
+            SymTable.Put(identifier, symbol);
+            return new LValue_LocalVar(symbol.VariableInfo);
         }
 
         public override Expression EmitRValue(CilEmitter emitter) {

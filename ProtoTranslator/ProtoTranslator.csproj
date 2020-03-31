@@ -40,7 +40,12 @@
   <ItemGroup>
     <Compile Include="Debug\Logger.cs" />
     <Compile Include="Debug\ConsoleLogger.cs" />
-    <Compile Include="SymbolTable.cs" />
+    <Compile Include="Keywords.cs" />
+    <Compile Include="Parsing\Exceptions\ParseException.cs" />
+    <Compile Include="SymbolTables\LocalVariableSymbol.cs" />
+    <Compile Include="SymbolTables\Symbol.cs" />
+    <Compile Include="SymbolTables\SymbolTable.cs" />
+    <Compile Include="Translator.cs" />
     <Compile Include="GenerationTester.cs" />
     <Compile Include="Generation\CilEmitter.cs" />
     <Compile Include="Lexer\LexicalAnalyser.cs" />
@@ -83,7 +88,8 @@
     <Compile Include="Parsing\NodeGenerators\INodeScanner.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Symbol.cs" />
+    <Compile Include="Types.cs" />
+    <Compile Include="_Scraps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Program.c">

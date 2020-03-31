@@ -8,12 +8,18 @@ namespace ProtoTranslator {
 
         public SymbolTable Prev => prev;
 
+        public SymbolTable() { }
+
         public SymbolTable(SymbolTable prev) {
             this.prev = prev;
         }
 
         public void Put(string key, Symbol sym) {
             symTable.Add(key, sym);
+        }
+
+        public T Get<T>(string key) where T : Symbol {
+            return Get(key) as T;
         }
 
         public Symbol Get(string key) {
