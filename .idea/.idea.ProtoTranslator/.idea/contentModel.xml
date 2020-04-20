@@ -28,20 +28,19 @@
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
           <e p="Scanners" t="Include">
+            <e p="ComparisonOperatorTokenScanner.cs" t="Include" />
             <e p="DefaultTokenScanner.cs" t="Include" />
             <e p="ITokenScanner.cs" t="Include" />
             <e p="NumericTokenScanner.cs" t="Include" />
-            <e p="OperatorTokenScanner.cs" t="Include" />
             <e p="StringTokenScanner.cs" t="Include" />
             <e p="WordTokenScanner.cs" t="Include" />
           </e>
-          <e p="Tag.cs" t="Include" />
+          <e p="Tags.cs" t="Include" />
           <e p="Token.cs" t="Include" />
           <e p="Tokens" t="Include">
-            <e p="FloatToken.cs" t="Include" />
             <e p="IntegerToken.cs" t="Include" />
             <e p="MiscToken.cs" t="Include" />
-            <e p="OperatorToken.cs" t="Include" />
+            <e p="RealToken.cs" t="Include" />
             <e p="StringToken.cs" t="Include" />
             <e p="TypeToken.cs" t="Include" />
             <e p="WordToken.cs" t="Include" />
@@ -52,30 +51,14 @@
           <e p="Exceptions" t="Include">
             <e p="ParseException.cs" t="Include" />
           </e>
+          <e p="Label.cs" t="Include" />
           <e p="Node.cs" t="Include" />
           <e p="NodeGenerators" t="Include">
             <e p="INodeScanner.cs" t="Include" />
           </e>
           <e p="Nodes" t="Include">
-            <e p="Expr_Assign.cs" t="Include" />
-            <e p="Expr_Cast.cs" t="Include" />
-            <e p="Expr_Comparison.cs" t="Include" />
-            <e p="Expr_Literal.cs" t="Include" />
-            <e p="Expr_LocalVar.cs" t="Include" />
-            <e p="Expr_LocalVarDeclaration.cs" t="Include" />
-            <e p="Expr_Parse.cs" t="Include" />
-            <e p="Expr_Scan.cs" t="Include" />
             <e p="Expression.cs" t="Include" />
-            <e p="Literal_Bool.cs" t="Include" />
-            <e p="Literal_Integer.cs" t="Include" />
-            <e p="Literal_String.cs" t="Include" />
-            <e p="LValue.cs" t="Include" />
-            <e p="LValue_LocalVar.cs" t="Include" />
             <e p="Statement.cs" t="Include" />
-            <e p="Stmt_For.cs" t="Include" />
-            <e p="Stmt_If.cs" t="Include" />
-            <e p="Stmt_Print.cs" t="Include" />
-            <e p="Stmt_Seq.cs" t="Include" />
           </e>
           <e p="Parser.cs" t="Include" />
         </e>

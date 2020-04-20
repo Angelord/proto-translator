@@ -3,7 +3,7 @@
 
         public readonly char Symbol;
         
-        public MiscToken(char symbol) : base(Tag.Misc) {
+        public MiscToken(char symbol) : base(symbol) {
             Symbol = symbol;
         }
 

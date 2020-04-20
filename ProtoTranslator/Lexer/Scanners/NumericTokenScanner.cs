@@ -21,7 +21,7 @@ namespace ProtoTranslator.Lexer.Scanners {
             string numericString = ScanNumericString(pointer, out bool isFloat);
 
             if (isFloat) {
-                token = new FloatToken(float.Parse(numericString));
+                token = new RealToken(float.Parse(numericString));
             }
             else {
                 token = new IntegerToken(int.Parse(numericString));

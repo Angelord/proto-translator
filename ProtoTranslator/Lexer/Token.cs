@@ -3,10 +3,10 @@
 namespace ProtoTranslator.Lexer {
     public abstract class Token {
 
-        public readonly Tag Tag;
+        public readonly int Tag;
         public int Line;
         
-        protected Token(Tag tag) {
+        protected Token(int tag) {
             Tag = tag;
         }
     }

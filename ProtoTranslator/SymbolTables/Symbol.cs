@@ -1,4 +1,4 @@
-﻿namespace ProtoTranslator {
+﻿﻿namespace ProtoTranslator {
 
     public class FunctionSymbol {
         

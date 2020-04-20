@@ -14,13 +14,13 @@ namespace ProtoTranslator.Lexer.Scanners {
 
         public WordTokenScanner() {
             // Keywords
-            ReserveWord(new WordToken(Tag.If, "if"));
-            ReserveWord(new WordToken(Tag.Else, "else"));
-            ReserveWord(new WordToken(Tag.Do, "do"));
-            ReserveWord(new WordToken(Tag.While, "while"));
-            ReserveWord(new WordToken(Tag.Break, "break"));
-            ReserveWord(new WordToken(Tag.True, "true"));
-            ReserveWord(new WordToken(Tag.False, "false"));
+            ReserveWord(new WordToken(Tags.IF, "if"));
+            ReserveWord(new WordToken(Tags.ELSE, "else"));
+            ReserveWord(new WordToken(Tags.DO, "do"));
+            ReserveWord(new WordToken(Tags.WHILE, "while"));
+            ReserveWord(new WordToken(Tags.BREAK, "break"));
+            ReserveWord(WordToken.True);
+            ReserveWord(WordToken.False);
             
             // Types
             ReserveWord(TypeToken.Int);
@@ -29,12 +29,12 @@ namespace ProtoTranslator.Lexer.Scanners {
             ReserveWord(TypeToken.Bool);
 
             // Missing * and pchar
-            ReserveWord(new WordToken(Tag.Id, "abs"));
-            ReserveWord(new WordToken(Tag.Id, "sqr"));
-            ReserveWord(new WordToken(Tag.Id, "odd"));
-            ReserveWord(new WordToken(Tag.Id, "ord"));
-            ReserveWord(new WordToken(Tag.Id, "scanf"));
-            ReserveWord(new WordToken(Tag.Id, "printf"));
+            ReserveWord(new WordToken(Tags.ID, "abs"));
+            ReserveWord(new WordToken(Tags.ID, "sqr"));
+            ReserveWord(new WordToken(Tags.ID, "odd"));
+            ReserveWord(new WordToken(Tags.ID, "ord"));
+            ReserveWord(new WordToken(Tags.ID, "scanf"));
+            ReserveWord(new WordToken(Tags.ID, "printf"));
         }
 
         public bool TryScan(Pointer pointer, out Token token) {
@@ -64,7 +64,7 @@ namespace ProtoTranslator.Lexer.Scanners {
                 return wordToken;
             }
             
-            wordToken = new WordToken(Tag.Id, lexeme);
+            wordToken = new WordToken(Tags.ID, lexeme);
             ReserveWord(wordToken);
 
             return wordToken;

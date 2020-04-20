@@ -21,9 +21,8 @@ namespace ProtoTranslator.Lexer {
 
             scanners = new List<ITokenScanner>() {
                 new NumericTokenScanner(),
-                new StringTokenScanner(),
                 new WordTokenScanner(),
-                new OperatorTokenScanner(),
+                new ComparisonOperatorTokenScanner(),
                 new DefaultTokenScanner()
             };
         }

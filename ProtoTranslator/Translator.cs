@@ -27,9 +27,11 @@ namespace ProtoTranslator {
             
             using (lexer) {
                 
-                Parser parser = new Parser();
+                Parser parser = new Parser(lexer);
 
-                parser.Parse(lexer, emitter);
+                SyntaxTree syntaxTree = parser.Parse();
+                
+                syntaxTree.Generate(emitter);
             }
             
             lexicalLogger.Flush();
