@@ -21,6 +21,10 @@
         </e>
         <e p="Generation" t="Include">
           <e p="CilEmitter.cs" t="Include" />
+          <e p="CilLabel.cs" t="Include" />
+          <e p="CilLocalVariable.cs" t="Include" />
+          <e p="ILabel.cs" t="Include" />
+          <e p="ILocalVariable.cs" t="Include" />
         </e>
         <e p="GenerationTester.cs" t="Include" />
         <e p="Keywords.cs" t="Include" />
@@ -51,16 +55,35 @@
           <e p="Exceptions" t="Include">
             <e p="ParseException.cs" t="Include" />
           </e>
-          <e p="Label.cs" t="Include" />
           <e p="Node.cs" t="Include" />
-          <e p="NodeGenerators" t="Include">
-            <e p="INodeScanner.cs" t="Include" />
-          </e>
           <e p="Nodes" t="Include">
             <e p="Expression.cs" t="Include" />
+            <e p="Expressions" t="Include">
+              <e p="AndExpression.cs" t="Include" />
+              <e p="ArithmeticExpression.cs" t="Include" />
+              <e p="BinaryLogicalExpression.cs" t="Include" />
+              <e p="BoolConstantExpression.cs" t="Include" />
+              <e p="ComparisonExpression.cs" t="Include" />
+              <e p="FloatConstantExpression.cs" t="Include" />
+              <e p="IdExpression.cs" t="Include" />
+              <e p="IntConstantExpression.cs" t="Include" />
+              <e p="NegateExpression.cs" t="Include" />
+              <e p="NotExpression.cs" t="Include" />
+              <e p="OrExpression.cs" t="Include" />
+            </e>
             <e p="Statement.cs" t="Include" />
+            <e p="Statements" t="Include">
+              <e p="BreakStatement.cs" t="Include" />
+              <e p="DoStatement.cs" t="Include" />
+              <e p="ElseStatement.cs" t="Include" />
+              <e p="IfStatement.cs" t="Include" />
+              <e p="SeqStatement.cs" t="Include" />
+              <e p="SetStatement.cs" t="Include" />
+              <e p="WhileStatement.cs" t="Include" />
+            </e>
           </e>
           <e p="Parser.cs" t="Include" />
+          <e p="SyntaxTree.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -77,7 +100,7 @@
         </e>
         <e p="TODO.txt" t="Include" />
         <e p="Translator.cs" t="Include" />
-        <e p="Types.cs" t="Include" />
+        <e p="TypeUtils.cs" t="Include" />
       </e>
       <e p="ProtoTranslator.sln" t="IncludeFlat" />
     </e>

@@ -7,6 +7,8 @@ namespace ProtoTranslator.Lexer.Scanners {
     public class ComparisonOperatorTokenScanner : ITokenScanner {
 
         private static readonly Dictionary<string, WordToken> MultiCharOperators = new Dictionary<string, WordToken>() {
+            { "<", WordToken.Lt },
+            { ">", WordToken.Gt },
             { "<=", WordToken.Le },
             { "!=", WordToken.Ne },
             { ">=", WordToken.Ge },

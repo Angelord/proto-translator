@@ -2,8 +2,20 @@
 
 namespace ProtoTranslator.Debug {
     public abstract class Logger {
-        
+
+        private int indent = 0;
         private readonly StringBuilder builder = new StringBuilder();
+
+        // Increase the indentation at the start of new lines
+        public void IncreaseIndent() {
+            indent++;
+        }
+
+        // Decrease the indentation at the start of new lines
+        public void DecreaseIndent() {
+            indent--;
+            if (indent < 0) indent = 0;
+        }
 
         public void Log(object value) {
             builder.Append(value);
@@ -15,7 +27,12 @@ namespace ProtoTranslator.Debug {
         }
 
         public void LogLine(object value) {
-            builder.AppendLine(value.ToString());
+            builder.AppendLine();
+            for (int i = 0; i < indent; i++) {
+                builder.Append(' ');
+            }
+            
+            builder.Append(value.ToString());
         }
 
         public void Flush() {

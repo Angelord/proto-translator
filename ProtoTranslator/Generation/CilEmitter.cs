@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
+using ProtoTranslator.Parsing;
 
 namespace ProtoTranslator.Generation {
 
@@ -305,7 +306,8 @@ namespace ProtoTranslator.Generation {
             ilGenerator.Emit(OpCodes.Call, ConcatMethodInfo);
         }
 
-        public LocalBuilder EmitLocalVarDeclaration(string localVarName, Type localVarType) {
+        public ILocalVariable EmitLocalVarDeclaration(string localVarName, Type localVarType) {
+            
             LocalBuilder localBuilder = ilGenerator.DeclareLocal(localVarType);
 //            if (CanInitializeLocation(localVarType)) {
 //                // Store the already prepared initializer
@@ -313,7 +315,7 @@ namespace ProtoTranslator.Generation {
 //            }
             localBuilder.SetLocalSymInfo(localVarName);
 
-            return localBuilder;
+            return new CilLocalVariable(ilGenerator, localBuilder);
         }
 
         private bool CanInitializeLocation(Type type) {
@@ -337,29 +339,11 @@ namespace ProtoTranslator.Generation {
             return false;
         }
         
-        public void EmitLocalVarAssignment(LocalVariableInfo localVariableInfo) {
-            ilGenerator.Emit(OpCodes.Stloc, (LocalBuilder) localVariableInfo);
-        }
-        
-        public Label GenerateLabel() {
-            return ilGenerator.DefineLabel();
+        public ILabel GenerateLabel() {
+            return new CilLabel(ilGenerator);
         }
 
-        public void EmitLabel(Label label) {
-            ilGenerator.MarkLabel(label);
-        }
-
-        public void EmitIfFalse(Label label) {
-            ilGenerator.Emit(OpCodes.Brfalse, label);
-        }
-
-        public void EmitJump(Label label) {
-            ilGenerator.Emit(OpCodes.Br, label);
-        }
-        
-        public void EmitLocalVar(LocalVariableInfo localVariableInfo) {
-            ilGenerator.Emit(OpCodes.Ldloc, (LocalBuilder) localVariableInfo);
-        }
+        #region Emitting Constants
 
         public void EmitInt32(int value) {
             ilGenerator.Emit(OpCodes.Ldc_I4, value);
@@ -384,5 +368,7 @@ namespace ProtoTranslator.Generation {
         public void EmitNull() {
             ilGenerator.Emit(OpCodes.Ldnull);
         }
+
+        #endregion
     }
 }

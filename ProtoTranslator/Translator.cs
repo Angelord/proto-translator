@@ -20,7 +20,8 @@ namespace ProtoTranslator {
         public void Translate() {
             
             Logger lexicalLogger = new ConsoleLogger();
-            
+            Logger treeLogger = new ConsoleLogger();
+
             LexicalAnalyser lexer = new LexicalAnalyser(sourceFilepath, lexicalLogger);
 
             CilEmitter emitter = new CilEmitter(programName);
@@ -31,10 +32,13 @@ namespace ProtoTranslator {
 
                 SyntaxTree syntaxTree = parser.Parse();
                 
+                syntaxTree.Log(treeLogger);
+                
                 syntaxTree.Generate(emitter);
             }
             
-            lexicalLogger.Flush();
+//            lexicalLogger.Flush();
+            treeLogger.Flush();
         }
     }
 }

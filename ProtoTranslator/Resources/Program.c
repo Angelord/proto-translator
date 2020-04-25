@@ -1,19 +1,13 @@
-﻿
-// Initialize the counter
-
-a = scanf();
-
-b = scanf();
-
-absVal = abs(a - b);
-
-if(b != !a && c >= d) {
+﻿{
+    int i; 
+    int j;
     
-}
+    i = 4 + 5;   
 
-if(absVal >= 0) {
-    printf(1);
-}
-else {
-    printf(0);
+    if(i <= 20) {
+        j = 1;
+    }
+    else {
+        j = 0;
+    }
 }

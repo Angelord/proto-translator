@@ -7,7 +7,7 @@ namespace ProtoTranslator.Lexer {
 
         private readonly StreamReader stream;
         private readonly StringBuilder scanned;
-        private int lines;
+        private int lines = 1;
 
         public int Lines => lines;
 

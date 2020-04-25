@@ -2,6 +2,8 @@
 using ProtoTranslator.Lexer.Tokens;
 using ProtoTranslator.Parsing.Exceptions;
 using ProtoTranslator.Parsing.Nodes;
+using ProtoTranslator.Parsing.Nodes.Expressions;
+using ProtoTranslator.Parsing.Nodes.Statements;
 
 namespace ProtoTranslator.Parsing {
     // Reads a stream of tokens and builds a syntax tree.
@@ -46,7 +48,7 @@ namespace ProtoTranslator.Parsing {
                 Match(Tags.ID);
                 Match(';');
                 
-                IdExpr id = new IdExpr((WordToken)curToken, type, memoryUsed);
+                IdExpression id = new IdExpression((WordToken)curToken, type, memoryUsed);
                 top.Put(curToken, id);
                 memoryUsed += type.Width;
             }
@@ -146,7 +148,7 @@ namespace ProtoTranslator.Parsing {
         private Statement Assign() {
             Token curToken = look;
             Match(Tags.ID);
-            IdExpr id = top.Get(curToken);
+            IdExpression id = top.Get(curToken);
             if(id == null) Error(curToken.ToString() + " undeclared identifier");
             
             Match('=');
@@ -160,7 +162,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Join();
             while (look.Tag == Tags.OR) {
                 Move();
-                lhs = new OrExpression(prev, lhs, Join());
+                lhs = new OrExpression(lhs, Join());
             }
 
             return lhs;
@@ -170,7 +172,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Equality();
             while (look.Tag == Tags.AND) {
                 Move();
-                lhs = new AndExpression(prev, lhs, Equality());
+                lhs = new AndExpression(lhs, Equality());
             }
 
             return lhs;
@@ -180,7 +182,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Relational();
             while (look.Tag == Tags.EQ || look.Tag == Tags.NE) {
                 Move();
-                lhs = new RelationalExpr(prev, lhs, Relational());
+                lhs = new ComparisonExpression((prev as WordToken), lhs, Relational());
             }
 
             return lhs;
@@ -191,10 +193,10 @@ namespace ProtoTranslator.Parsing {
             switch (look.Tag) {
                 case Tags.LE: 
                 case Tags.GE: 
-                case '<':
-                case '>':   
+                case Tags.LT:
+                case Tags.GT:   
                     Move();
-                    return new RelationalExpr(prev, lhs, Expr());
+                    return new ComparisonExpression((prev as WordToken), lhs, Expr());
                 default:
                     return lhs;
             }
@@ -204,7 +206,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Term();
             while (look.Tag == '+' || look.Tag == '-') {
                 Move();
-                lhs = new ArithmeticExpr(prev, lhs, Term());
+                lhs = new ArithmeticExpression(prev, lhs, Term());
             }
 
             return lhs;
@@ -215,7 +217,7 @@ namespace ProtoTranslator.Parsing {
             while (look.Tag == '*' || look.Tag == '/') {
                 Token cur = look;
                 Move();
-                expr = new ArithmeticExpr(cur, expr, Unary());
+                expr = new ArithmeticExpression(cur, expr, Unary());
             }
 
             return expr;
@@ -224,11 +226,11 @@ namespace ProtoTranslator.Parsing {
         private Expression Unary() {
             if (look.Tag == '-') {
                 Move();
-                return new UnaryExpr(WordToken.Minus, Unary());
+                return new NegateExpression(Unary());
             }
             if (look.Tag == '!') {
                 Move();
-                return new NotExpression(prev, Unary());
+                return new NotExpression(Unary());
             }
 
             return Factor();
@@ -243,21 +245,23 @@ namespace ProtoTranslator.Parsing {
                     Match(')');
                     return expr;
                 case Tags.NUMBER:
-                    expr = new ConstantExpr(look, TypeToken.Int);
+                    IntegerToken token = (IntegerToken) look;
+                    expr = new IntConstantExpression(token.Value);
                     Move();
                     return expr;
                 case Tags.REAL:
-                    expr = new ConstantExpr(look, TypeToken.Float);
+                    RealToken realToken = (RealToken) look;
+                    expr = new FloatConstantExpression(realToken.Value);
                     Move();
                     return expr;
                 case Tags.TRUE:
                     Move(); 
-                    return ConstantExpr.True;
+                    return BoolConstantExpression.True;;
                 case Tags.FALSE:
                     Move();
-                    return ConstantExpr.False;
+                    return BoolConstantExpression.False;
                 case Tags.ID:
-                    IdExpr id = top.Get(look);
+                    IdExpression id = top.Get(look);
                     if(id == null) Error(look.ToString() + " undeclared identifier");
                     Move();
                     return id;
