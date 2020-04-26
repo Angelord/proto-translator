@@ -9,7 +9,7 @@ using ProtoTranslator.Parsing.Nodes.Statements;
 namespace ProtoTranslator.Parsing {
     // Reads a stream of tokens and builds a syntax tree.
     public class Parser {
-        
+
         private LexicalAnalyser lexer;
         private Token look;
         private Token prev;
@@ -22,10 +22,19 @@ namespace ProtoTranslator.Parsing {
         }
 
         public SyntaxTree Parse() {
-            
+
             // TODO : Rework to not require { } around entire program
+
+            return new SyntaxTree(Program());
+        }
+
+        private Statement Program() {
             
-            return new SyntaxTree(Block());
+            top = new SymbolTable();
+            
+            Statement root = Statements();
+
+            return root;
         }
 
         private Statement Block() {
@@ -48,7 +57,7 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Statement Statements() {
-            if (look.Tag == '}') return Nodes.Statement.Null;
+            if (look == null || look.Tag == '}') return Nodes.Statement.Null;
             return new SeqStatement(Stmt(), Statements());
         }
 
@@ -317,7 +326,7 @@ namespace ProtoTranslator.Parsing {
 
         private void Match(int tag) {
             if (look.Tag == tag) { Move(); return; }
-            Error("Unexpected token " + look.Tag);
+            Error("Unexpected token " + ((char)look.Tag));
         }
     }
 }
