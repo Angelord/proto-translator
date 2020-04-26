@@ -6,9 +6,9 @@ using ProtoTranslator.Generation;
 namespace ProtoTranslator.Parsing.Nodes {
     public abstract class Expression : Node {
         
-        public Type Type { get; protected set; }
+        public Type ReturnType { get; protected set; }
 
-        protected Expression(Type type) { Type = type; }
+        protected Expression(Type returnType) { ReturnType = returnType; }
         
         public abstract void EmitRValue(CilEmitter emitter);
     }

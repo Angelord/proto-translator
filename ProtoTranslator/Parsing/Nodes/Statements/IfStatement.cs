@@ -11,7 +11,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
         public IfStatement(Expression logicalExpr, Statement contents) {
             this.logicalExpr = logicalExpr;
             this.contents = contents;
-            if (logicalExpr.Type != typeof(bool)) logicalExpr.Error("Expression in if must evaluate to bool");
+            if (logicalExpr.ReturnType != typeof(bool)) logicalExpr.Error("Expression in if must evaluate to bool");
         }
 
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {

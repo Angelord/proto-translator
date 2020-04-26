@@ -21,8 +21,10 @@
         </e>
         <e p="Generation" t="Include">
           <e p="CilEmitter.cs" t="Include" />
+          <e p="CilFunction.cs" t="Include" />
           <e p="CilLabel.cs" t="Include" />
           <e p="CilLocalVariable.cs" t="Include" />
+          <e p="IFunction.cs" t="Include" />
           <e p="ILabel.cs" t="Include" />
           <e p="ILocalVariable.cs" t="Include" />
         </e>
@@ -65,11 +67,12 @@
               <e p="BoolConstantExpression.cs" t="Include" />
               <e p="ComparisonExpression.cs" t="Include" />
               <e p="FloatConstantExpression.cs" t="Include" />
-              <e p="IdExpression.cs" t="Include" />
+              <e p="FuncCallExpression.cs" t="Include" />
               <e p="IntConstantExpression.cs" t="Include" />
               <e p="NegateExpression.cs" t="Include" />
               <e p="NotExpression.cs" t="Include" />
               <e p="OrExpression.cs" t="Include" />
+              <e p="VariableUseExpression.cs" t="Include" />
             </e>
             <e p="Statement.cs" t="Include" />
             <e p="Statements" t="Include">
@@ -78,7 +81,8 @@
               <e p="ElseStatement.cs" t="Include" />
               <e p="IfStatement.cs" t="Include" />
               <e p="SeqStatement.cs" t="Include" />
-              <e p="SetStatement.cs" t="Include" />
+              <e p="VariableAssignStatement.cs" t="Include" />
+              <e p="VariableDeclarationStatement.cs" t="Include" />
               <e p="WhileStatement.cs" t="Include" />
             </e>
           </e>

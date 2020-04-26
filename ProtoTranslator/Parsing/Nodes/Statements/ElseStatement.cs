@@ -15,7 +15,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             this.logicalExpression = logicalExpression;
             this.ifStatement = ifStatement;
             this.elseStatement = elseStatement;
-            if (logicalExpression.Type != typeof(bool)) 
+            if (logicalExpression.ReturnType != typeof(bool)) 
                 logicalExpression.Error("Expression in if must evaluate to bool");
         }
 

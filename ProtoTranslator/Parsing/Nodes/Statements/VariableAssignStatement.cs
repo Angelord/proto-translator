@@ -2,36 +2,35 @@
 using ProtoTranslator.Generation;
 using ProtoTranslator.Parsing.Nodes.Expressions;
 
-namespace ProtoTranslator.Parsing.Nodes {
+namespace ProtoTranslator.Parsing.Nodes.Statements {
     // Implements assignment to identifiers
-    public class SetStatement : Statement {
+    public class VariableAssignStatement : Statement {
 
-        private readonly IdExpression idExpr;
+        private readonly VariableUseExpression variableUseExpr;
         private readonly Expression valueExpr;
 
-        public SetStatement(IdExpression idExpr, Expression valueExpr) {
-            this.idExpr = idExpr;
+        public VariableAssignStatement(VariableUseExpression variableUseExpr, Expression valueExpr) {
+            this.variableUseExpr = variableUseExpr;
             this.valueExpr = valueExpr;
          
             CheckTypes();
         }
 
         private void CheckTypes() {
-            if(TypeUtils.Numeric(idExpr.Type) && TypeUtils.Numeric(valueExpr.Type)) return;
-            if(idExpr.Type == typeof(bool) && valueExpr.Type == typeof(bool)) return;
+            if(TypeUtils.Numeric(variableUseExpr.ReturnType) && TypeUtils.Numeric(valueExpr.ReturnType)) return;
+            if(variableUseExpr.ReturnType == typeof(bool) && valueExpr.ReturnType == typeof(bool)) return;
             Error("Type Error");
         }
 
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
-            idExpr.Declare(emitter);
             valueExpr.EmitRValue(emitter);
-            idExpr.EmitAssignment(emitter);
+            variableUseExpr.EmitAssignment();
         }
 
         public override void Log(Logger logger) {
             logger.LogLine("Assignment");
             logger.IncreaseIndent();
-            idExpr.Log(logger);
+            variableUseExpr.Log(logger);
             valueExpr.Log(logger);
             logger.DecreaseIndent();
         }

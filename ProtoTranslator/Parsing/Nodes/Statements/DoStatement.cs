@@ -15,7 +15,7 @@ namespace ProtoTranslator.Parsing.Nodes {
         public void Init(Expression logicalExpr, Statement statement) {
             this.logicalExpr = logicalExpr;
             this.statement = statement;
-            if (logicalExpr.Type != typeof(bool)) 
+            if (logicalExpr.ReturnType != typeof(bool)) 
                 logicalExpr.Error("Expression in while must evaluate to bool"); 
         }
 

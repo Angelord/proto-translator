@@ -15,9 +15,9 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             this.lhs = lhs;
             this.rhs = rhs;
 
-            Type = TypeUtils.Max(lhs.Type, rhs.Type);
+            ReturnType = TypeUtils.Max(lhs.ReturnType, rhs.ReturnType);
             
-            if(Type == null) Error("Type error");
+            if(ReturnType == null) Error("Type error");
         }
         
         public override void EmitRValue(CilEmitter emitter) {

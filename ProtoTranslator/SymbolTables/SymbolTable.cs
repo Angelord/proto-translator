@@ -6,7 +6,7 @@ using ProtoTranslator.Parsing.Nodes.Expressions;
 namespace ProtoTranslator {
     public class SymbolTable {
 
-        private readonly Dictionary<Token, IdExpression> symTable = new Dictionary<Token, IdExpression>();
+        private readonly Dictionary<Token, Symbol> symTable = new Dictionary<Token, Symbol>();
         private readonly SymbolTable prev;
 
         public SymbolTable Prev => prev;
@@ -17,13 +17,13 @@ namespace ProtoTranslator {
             this.prev = prev;
         }
 
-        public void Put(Token key, IdExpression id) {
-            symTable.Add(key, id);
+        public void Put(Token key, Symbol variable) {
+            symTable.Add(key, variable);
         }
 
-        public IdExpression Get(Token key) {
+        public Symbol Get(Token key) {
             for (SymbolTable env = this; env != null; env = env.prev) {
-                if (env.symTable.TryGetValue(key, out IdExpression found)) {
+                if (env.symTable.TryGetValue(key, out Symbol found)) {
                     return found;
                 }
             }

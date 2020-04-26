@@ -109,6 +109,16 @@ namespace ProtoTranslator.Generation {
             ilGenerator.Emit(OpCodes.Ret);
         }
 
+        public IFunction GetWriteFunction(Type type) {
+            MethodInfo writeLineFunc = typeof(Console).GetMethod("WriteLine", new Type[] {type});
+            return new CilFunction(ilGenerator, writeLineFunc);
+        }
+
+        public IFunction GetReadFunction(Type type) {
+            MethodInfo readLineFunc = typeof(Console).GetMethod("ReadLine", new Type[0]);
+            return new CilFunction(ilGenerator, readLineFunc);
+        }
+
         public void EmitWrite(Type type) {
             MethodInfo writeLineMethod = typeof(Console).GetMethod("WriteLine", new Type[] {type});
             ilGenerator.Emit(OpCodes.Call, writeLineMethod);

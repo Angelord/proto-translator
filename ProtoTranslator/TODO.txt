@@ -1,7 +1,9 @@
 ﻿
-Declarations in more than one place
-
 Built in function calls (printf, scanf etc...)
+
+String support
+
+Declarations in more than one place
 
 Remove { } brackets surrounding entire program
 

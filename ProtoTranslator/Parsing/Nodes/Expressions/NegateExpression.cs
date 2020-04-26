@@ -8,9 +8,9 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
         
         public NegateExpression(Expression expression) : base(null) {
             this.expression = expression;
-            Type = TypeUtils.Max(typeof(int), this.expression.Type);
+            ReturnType = TypeUtils.Max(typeof(int), this.expression.ReturnType);
             
-            if(Type == null) Error("Type error"); 
+            if(ReturnType == null) Error("Type error"); 
         }
         
         public override void EmitRValue(CilEmitter emitter) {

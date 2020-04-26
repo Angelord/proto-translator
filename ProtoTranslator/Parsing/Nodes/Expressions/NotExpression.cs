@@ -9,7 +9,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
         public NotExpression(Expression expression) : base(typeof(bool)) {
             this.expression = expression;
             
-            if(expression.Type != typeof(bool)) Error("Type Error");
+            if(expression.ReturnType != typeof(bool)) Error("Type Error");
         }
         
         public override void EmitRValue(CilEmitter emitter) {
