@@ -21,6 +21,8 @@ namespace ProtoTranslator.Parsing {
 
             emitter.BeginMethod("main", typeof(Int32), new Type[0]);
 
+            
+            
             ILabel begin = emitter.GenerateLabel();
             ILabel end = emitter.GenerateLabel();
             

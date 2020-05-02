@@ -29,12 +29,12 @@ namespace ProtoTranslator.Lexer.Scanners {
             ReserveWord(TypeToken.Bool);
 
             // Missing * and pchar
-            ReserveWord(new WordToken(Tags.ID, "abs"));
-            ReserveWord(new WordToken(Tags.ID, "sqr"));
-            ReserveWord(new WordToken(Tags.ID, "odd"));
-            ReserveWord(new WordToken(Tags.ID, "ord"));
-            ReserveWord(new WordToken(Tags.ID, "scanf"));
-            ReserveWord(new WordToken(Tags.ID, "printf"));
+//            ReserveWord(new WordToken(Tags.ID, "abs"));
+//            ReserveWord(new WordToken(Tags.ID, "sqr"));
+//            ReserveWord(new WordToken(Tags.ID, "odd"));
+//            ReserveWord(new WordToken(Tags.ID, "ord"));
+//            ReserveWord(new WordToken(Tags.ID, "scanf"));
+            ReserveWord(WordToken.PrintF);
         }
 
         public bool TryScan(Pointer pointer, out Token token) {

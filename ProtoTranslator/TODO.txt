@@ -3,7 +3,7 @@ Built in function calls (printf, scanf etc...)
 
 String support
 
-Casting ?
+Casting to match func params
 
 + Declarations in more than one place
 

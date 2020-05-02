@@ -13,7 +13,9 @@
             Minus = new WordToken(Tags.MINUS, "minus"),
             True = new WordToken(Tags.TRUE, "true"),
             False = new WordToken(Tags.FALSE, "false"),
-            Temp = new WordToken(Tags.TEMP, "t");
+            Temp = new WordToken(Tags.TEMP, "t"),
+            PrintF = new WordToken(Tags.ID, "printf");
+        
 
         public readonly string Lexeme;
 

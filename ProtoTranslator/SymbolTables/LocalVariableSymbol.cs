@@ -1,16 +1,15 @@
-﻿//using System;
-//using System.Reflection;
-//
-//namespace ProtoTranslator {
-//    public class LocalVariableSymbol : Symbol {
-//
-//        public readonly Type Type;
-//
-//        public readonly LocalVariableInfo VariableInfo;
-//
-//        public LocalVariableSymbol(Type type, LocalVariableInfo variableInfo) {
-//            Type = type;
-//            VariableInfo = variableInfo;
-//        }
-//    }
-//}
+﻿using System;
+using ProtoTranslator.Generation;
+
+namespace ProtoTranslator {
+    public class LocalVariableSymbol : Symbol {
+        
+        public ILocalVariable Variable;
+
+        public readonly Type VariableType;
+        
+        public LocalVariableSymbol(string name, Type variableType) : base(name) {
+            VariableType = variableType;
+        }
+    }
+}

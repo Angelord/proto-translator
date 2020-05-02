@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ProtoTranslator.Lexer;
 using ProtoTranslator.Lexer.Tokens;
 using ProtoTranslator.Parsing.Exceptions;
@@ -23,8 +24,6 @@ namespace ProtoTranslator.Parsing {
 
         public SyntaxTree Parse() {
 
-            // TODO : Rework to not require { } around entire program
-
             return new SyntaxTree(Program());
         }
 
@@ -32,7 +31,7 @@ namespace ProtoTranslator.Parsing {
             
             top = new SymbolTable();
             
-            Statement root = Statements();
+            Statement root = new SeqStatement(new StandardLibraryDefinitionsStatement(top), Statements());
 
             return root;
         }
@@ -79,9 +78,18 @@ namespace ProtoTranslator.Parsing {
                     return Block();
                 case Tags.BASIC_TYPE:
                     return VariableDeclaration();
+                case Tags.ID:
+                    Move();
+                    if (look.Tag == '(') {
+                        return FuncCallStatement();
+                    }
+                    else {
+                        return Assign();
+                    }
             }
             
-            return Assign();
+            Error("Unexpected token");
+            return null;
         }
 
         private Statement If() {
@@ -159,18 +167,21 @@ namespace ProtoTranslator.Parsing {
 
             Match(';');
             
-            LocalVariableSymbol symbol = new LocalVariableSymbol(identifierToken.Lexeme, type.DotNetType);
-            top.Put(identifierToken, symbol);
+            LocalVariableSymbol symbol = top.PutVar(identifierToken.Lexeme, type.DotNetType);
             memoryUsed += type.Width;
             
             return new VariableDeclarationStatement(symbol, initialValue);
         }
 
+        private Statement FuncCallStatement() {
+            return new FuncCallStatement(FuncCallExpression());
+        }
+
         private Statement Assign() {
-            Token curToken = look;
-            Match(Tags.ID);
-            LocalVariableSymbol variableSymbol = top.Get(curToken) as LocalVariableSymbol;
-            if(variableSymbol == null) Error(curToken.ToString() + " undeclared identifier");
+//            Token curToken = look;
+//            Match(Tags.ID);
+            LocalVariableSymbol variableSymbol = top.GetVar((prev as WordToken).Lexeme);
+            if(variableSymbol == null) Error(prev + " undeclared identifier");
             
             Match('=');
             Statement stmt = new VariableAssignStatement(new VariableUseExpression(variableSymbol), Bool());
@@ -282,37 +293,50 @@ namespace ProtoTranslator.Parsing {
                     Move();
                     return BoolConstantExpression.False;
                 case Tags.ID:
-                    Symbol idSymbol = top.Get(look);
-                    if(idSymbol == null) Error("Undeclared identifier : " + look);
+                    Move();
 
-                    if (idSymbol is LocalVariableSymbol) {
-                        Move();
-                        return new VariableUseExpression(idSymbol as LocalVariableSymbol);
+                    if (look.Tag == '(') {
+                        return FuncCallExpression();
                     }
-                    else if (idSymbol is FunctionSymbol) {
-                        Move();
-                        Match('(');
-                        List<Expression> parameters = Parameters();
-                        Match(')');
-                        return new FuncCallExpression(idSymbol as FunctionSymbol, parameters);
+                    else {
+                        // match variable
+                        LocalVariableSymbol var = top.GetVar((prev as WordToken).Lexeme);
+                        if(var == null) Error("Undeclared identifier : " + prev);
+                        return new VariableUseExpression(var);
                     }
-                    break;
             }
             
             Error("Syntax error");
             return null;
         }
 
+        private FuncCallExpression FuncCallExpression() {
+            WordToken idToken = prev as WordToken;
+            ;
+            Match('(');
+            Expression[] parameters = Parameters();
+            Match(')');
+            Type[] parameterTypes = ParseUtils.ExpressionArrayToTypes(parameters);
+
+            FunctionSymbol func = top.GetFunc(idToken.Lexeme, parameterTypes);
+            if(func == null) Error("Undeclared identifier : " + idToken);
+                            
+            return new FuncCallExpression(func, parameters);
+        }
+
         // Matches a list of parameters for a function
-        private List<Expression> Parameters() {
+        private Expression[] Parameters() {
 
             List<Expression> parameters = new List<Expression>();
             while (look.Tag != ')') {
                 parameters.Add(Bool());
-                Match(',');
+
+                if (look.Tag != ')') {
+                    Match(',');
+                }
             }
 
-            return parameters;
+            return parameters.ToArray();
         }
 
         private void Move() {

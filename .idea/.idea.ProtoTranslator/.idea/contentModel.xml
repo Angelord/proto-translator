@@ -74,11 +74,13 @@
               <e p="OrExpression.cs" t="Include" />
               <e p="VariableUseExpression.cs" t="Include" />
             </e>
+            <e p="StandardLibraryDefinitionsStatement.cs" t="Include" />
             <e p="Statement.cs" t="Include" />
             <e p="Statements" t="Include">
               <e p="BreakStatement.cs" t="Include" />
               <e p="DoStatement.cs" t="Include" />
               <e p="ElseStatement.cs" t="Include" />
+              <e p="FuncCallStatement.cs" t="Include" />
               <e p="IfStatement.cs" t="Include" />
               <e p="SeqStatement.cs" t="Include" />
               <e p="VariableAssignStatement.cs" t="Include" />
@@ -87,6 +89,7 @@
             </e>
           </e>
           <e p="Parser.cs" t="Include" />
+          <e p="ParseUtils.cs" t="Include" />
           <e p="SyntaxTree.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
@@ -98,6 +101,7 @@
           <e p="Program.c" t="Include" />
         </e>
         <e p="SymbolTables" t="Include">
+          <e p="FunctionSymbol.cs" t="Include" />
           <e p="LocalVariableSymbol.cs" t="Include" />
           <e p="Symbol.cs" t="Include" />
           <e p="SymbolTable.cs" t="Include" />

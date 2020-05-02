@@ -6,9 +6,9 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
     public class FuncCallExpression : Expression {
 
         private readonly FunctionSymbol symbol;
-        private readonly List<Expression> parameters;
+        private readonly Expression[] parameters;
 
-        public FuncCallExpression(FunctionSymbol symbol, List<Expression> parameters) : base(symbol.ReturnType) {
+        public FuncCallExpression(FunctionSymbol symbol, Expression[] parameters) : base(symbol.ReturnType) {
             this.symbol = symbol;
             this.parameters = parameters;
             
