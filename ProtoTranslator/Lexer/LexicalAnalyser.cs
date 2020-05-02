@@ -61,7 +61,7 @@ namespace ProtoTranslator.Lexer {
                 else if (!char.IsWhiteSpace(pointer.Current)) {
                     return;
                 }
-            } while (pointer.Move());
+            } while (!pointer.EndOfStream && pointer.Move());
         }
 
         private void SkipSingleLineComment() {

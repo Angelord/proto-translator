@@ -14,8 +14,9 @@
             True = new WordToken(Tags.TRUE, "true"),
             False = new WordToken(Tags.FALSE, "false"),
             Temp = new WordToken(Tags.TEMP, "t"),
-            PrintF = new WordToken(Tags.ID, "printf");
-        
+            PrintF = new WordToken(Tags.ID, "printf"),
+            ScanF = new WordToken(Tags.ID, "scanf");
+            
 
         public readonly string Lexeme;
 

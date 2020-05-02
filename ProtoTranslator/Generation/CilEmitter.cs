@@ -114,9 +114,14 @@ namespace ProtoTranslator.Generation {
             return new CilFunction(ilGenerator, writeLineFunc);
         }
 
-        public IFunction GetReadFunction(Type type) {
-            MethodInfo readLineFunc = typeof(Console).GetMethod("ReadLine", new Type[0]);
-            return new CilFunction(ilGenerator, readLineFunc);
+        public IFunction GetReadFunction() {
+            MethodInfo readFunc = typeof(Console).GetMethod("Read", new Type[0]);
+            return new CilFunction(ilGenerator, readFunc);
+        }
+
+        public IFunction GetReadLineFunction() {
+            MethodInfo readLineFunction = typeof(Console).GetMethod("ReadLine", new Type[0]);
+            return new CilFunction(ilGenerator, readLineFunction);
         }
 
         public void EmitWrite(Type type) {

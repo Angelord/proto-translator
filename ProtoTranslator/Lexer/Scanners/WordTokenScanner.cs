@@ -33,8 +33,9 @@ namespace ProtoTranslator.Lexer.Scanners {
 //            ReserveWord(new WordToken(Tags.ID, "sqr"));
 //            ReserveWord(new WordToken(Tags.ID, "odd"));
 //            ReserveWord(new WordToken(Tags.ID, "ord"));
-//            ReserveWord(new WordToken(Tags.ID, "scanf"));
+            ReserveWord(WordToken.ScanF);
             ReserveWord(WordToken.PrintF);
+            
         }
 
         public bool TryScan(Pointer pointer, out Token token) {
