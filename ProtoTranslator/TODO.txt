@@ -1,16 +1,18 @@
 ﻿
-Built in function calls (printf, scanf etc...)
+Built in function calls 
+    + printf
+    - scanf : CURRENT
 
-String support
+- String support
 
-Casting to match func params
+- Implicit Casting to match func params
+
+- More graceful exception handling -> print to terminal and exit.
 
 + Declarations in more than one place
 
 + Remove { } brackets surrounding entire program
 
-More graceful exception handling -> print to terminal and exit.
+Compound assignment operators (+=, -=, *=, /=)
 
-Compound assignment 
-
-Function calls
+Function declarations and calls

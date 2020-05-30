@@ -19,11 +19,14 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
         private void CheckTypes() {
             if(TypeUtils.Numeric(variableUseExpr.ReturnType) && TypeUtils.Numeric(valueExpr.ReturnType)) return;
             if(variableUseExpr.ReturnType == typeof(bool) && valueExpr.ReturnType == typeof(bool)) return;
+            if(variableUseExpr.ReturnType == typeof(string)) return;
             Error("Type Error");
         }
 
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
             valueExpr.EmitRValue(emitter);
+            if (valueExpr.ReturnType == typeof(string)) { emitter.EmitParse(variableUseExpr.ReturnType); }
+
             variableUseExpr.EmitAssignment();
         }
 

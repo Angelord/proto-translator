@@ -108,11 +108,6 @@ namespace ProtoTranslator.Generation {
             return new CilFunction(ilGenerator, writeLineFunc);
         }
 
-        public IFunction GetReadFunction() {
-            MethodInfo readFunc = typeof(Console).GetMethod("Read", new Type[0]);
-            return new CilFunction(ilGenerator, readFunc);
-        }
-
         public IFunction GetReadLineFunction() {
             MethodInfo readLineFunction = typeof(Console).GetMethod("ReadLine", new Type[0]);
             return new CilFunction(ilGenerator, readLineFunction);
@@ -183,6 +178,10 @@ namespace ProtoTranslator.Generation {
 
         public void EmitParse(Type toType) {
             MethodInfo parseMethod = toType.GetMethod("Parse", new Type[] {typeof(string)});
+            if (parseMethod == null) {
+                throw new InvalidOperationException("Invalid parsing of type " + toType);
+            }
+
             ilGenerator.Emit(OpCodes.Call, parseMethod);
         }
 

@@ -11,7 +11,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             this.symbol = symbol;
             this.initialValue = initialValue;
             
-            // TODO Type checking
+            // TODO : Type checking
         }
         
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
@@ -19,6 +19,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
 
             if (initialValue != null) {
                 initialValue.EmitRValue(emitter);
+                if (initialValue.ReturnType == typeof(string)) { emitter.EmitParse(symbol.VariableType); }
                 symbol.Variable.EmitAssignment();
             }
         }

@@ -1,7 +1,9 @@
 ﻿
 int input = scanf();
 
-printf(input);
+printf(input + 5);
+
+scanf();
 
 //int b = 3;
 //int c = 4 + 5;

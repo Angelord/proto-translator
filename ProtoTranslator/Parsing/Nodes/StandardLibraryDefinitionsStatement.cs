@@ -20,7 +20,7 @@ namespace ProtoTranslator.Parsing.Nodes {
             printChar = table.PutFunc(WordToken.PrintF.Lexeme, typeof(void), new[] {typeof(char)});
             printBool = table.PutFunc(WordToken.PrintF.Lexeme, typeof(void), new[] {typeof(bool)});
 
-            scanF = table.PutFunc(WordToken.ScanF.Lexeme, typeof(char), new Type[0]);
+            scanF = table.PutFunc(WordToken.ScanF.Lexeme, typeof(string), new Type[0]);
         }
 
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
@@ -29,7 +29,7 @@ namespace ProtoTranslator.Parsing.Nodes {
             printChar.Function = emitter.GetWriteFunction(typeof(char));
             printBool.Function = emitter.GetWriteFunction(typeof(bool));
 
-            scanF.Function = emitter.GetReadFunction();
+            scanF.Function = emitter.GetReadLineFunction();
         }
 
         public override void Log(Logger logger) {
