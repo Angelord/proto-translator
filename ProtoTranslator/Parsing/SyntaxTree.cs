@@ -6,7 +6,7 @@ using ProtoTranslator.Parsing.Nodes;
 namespace ProtoTranslator.Parsing {
     public class SyntaxTree {
 
-        private Statement root;
+        private readonly Statement root;
         
         public SyntaxTree(Statement root) {
             this.root = root;
@@ -19,10 +19,8 @@ namespace ProtoTranslator.Parsing {
         // Traverses the tree and generates output code 
         public void Generate(CilEmitter emitter) {
 
-            emitter.BeginMethod("main", typeof(Int32), new Type[0]);
+            emitter.BeginProgram();
 
-            
-            
             ILabel begin = emitter.GenerateLabel();
             ILabel end = emitter.GenerateLabel();
             
@@ -30,8 +28,6 @@ namespace ProtoTranslator.Parsing {
             root.Generate(emitter, begin, end);
             end.Emit();
             
-            emitter.EmitEmptyRead();
-
             emitter.WriteExecutable();
         }
     }

@@ -4,7 +4,7 @@ namespace ILGenerationResearch {
     internal class Program {
         public static void Main(string[] args) {
 
-            int input = Int32.Parse(Console.ReadLine());
+            int input = Console.Read();
             
             Console.WriteLine(input);
         }

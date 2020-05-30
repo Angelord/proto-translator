@@ -13,10 +13,11 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
 
         public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
             callExpr.EmitRValue(emitter);
+            if (callExpr.ReturnType != typeof(void)) { emitter.EmitPop(); }
         }
 
         public override void Log(Logger logger) {
-            logger.LogLine("Function call");
+            logger.LogLine("Function call statement : ");
             logger.IncreaseIndent();
             callExpr.Log(logger);
             logger.DecreaseIndent();

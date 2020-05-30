@@ -4,6 +4,7 @@ using ProtoTranslator.Generation;
 using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Parsing.Nodes {
+    // Makes sure the symbol table contains all the standard library functions such as printf and scanf
     public class StandardLibraryDefinitionsStatement : Statement {
 
         private readonly FunctionSymbol printInt;

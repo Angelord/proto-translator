@@ -28,7 +28,6 @@ namespace ProtoTranslator.Generation {
         private readonly ILGenerator ilGeneratorConstructor;
         private MethodBuilder method;
         private ILGenerator ilGenerator;
-        private bool currentMethodIsMain;
         private bool hasMainMethod;
 
         public CilEmitter(string programName) {
@@ -56,13 +55,20 @@ namespace ProtoTranslator.Generation {
             ilGeneratorConstructor.BeginScope();
         }
 
+        /// <summary> Should be called at the start, before any other code is emitted. </summary>
+        public void BeginProgram() {
+            if (hasMainMethod) { throw new InvalidOperationException("Only one main method can be defined for a program!"); }
+            MethodInfo method = BeginMethod("Main", typeof(void), new Type[0]);
+            assembly.SetEntryPoint(method);
+            hasMainMethod = true;
+        }
+
         public void WriteExecutable() {
+
             EndMethod();
 
             // TODO : Create custom exception
-            if (!hasMainMethod) {
-                throw new InvalidOperationException("No main method defined for program!");
-            }
+            if (!hasMainMethod) { throw new InvalidOperationException("No main method defined for program!"); }
 
             ilGeneratorConstructor.Emit(OpCodes.Ret);
             ilGeneratorConstructor.EndScope();
@@ -70,10 +76,6 @@ namespace ProtoTranslator.Generation {
             program.CreateType();
 
             assembly.Save(Path.GetFileName(exeExePath));
-        }
-
-        public MethodInfo BeginMain() {
-            return BeginMethod("main", typeof(Int32), new Type[0]);
         }
 
         public MethodInfo BeginMethod(string methodName, Type returnType, Type[] parameterTypes) {
@@ -85,13 +87,6 @@ namespace ProtoTranslator.Generation {
             ilGenerator = method.GetILGenerator();
 
             BeginScope();
-
-            currentMethodIsMain = false;
-            if (methodName.ToLower() == "main" && returnType == typeof(Int32) && parameterTypes.Length == 0) {
-                currentMethodIsMain = true;
-                hasMainMethod = true;
-                assembly.SetEntryPoint(method);
-            }
 
             return method;
         }
@@ -105,7 +100,6 @@ namespace ProtoTranslator.Generation {
         }
 
         public void EmitReturn() {
-            if(currentMethodIsMain) ilGenerator.Emit(OpCodes.Ldc_I4_0);
             ilGenerator.Emit(OpCodes.Ret);
         }
 
