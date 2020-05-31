@@ -24,7 +24,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             }
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Var Declaration " + symbol.VariableType + " " + symbol.Name);
             if(initialValue != null) {
                 logger.IncreaseIndent();

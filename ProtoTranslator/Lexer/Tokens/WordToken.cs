@@ -23,7 +23,11 @@
         public WordToken(int tag, string lexeme) : base(tag) {
             Lexeme = lexeme;
         }
-        
+
+        public override string GetLexeme() { 
+            return Lexeme;
+        }
+
         public override string ToString() {
             return $"<{Tag}, {Lexeme}>";
         }

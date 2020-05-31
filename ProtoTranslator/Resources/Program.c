@@ -1,7 +1,8 @@
 ﻿
-int input = scanf();
+int input_a = scanf();
+int input_b = scanf();
 
-printf(input + 5);
+printf(input_a + input_b);
 
 scanf();
 

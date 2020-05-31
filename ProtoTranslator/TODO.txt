@@ -3,6 +3,8 @@ Built in function calls
     + printf
     + scanf 
 
+- Emitter interface
+
 - String support
 
 - Implicit Casting to match func params

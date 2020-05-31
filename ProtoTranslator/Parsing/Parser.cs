@@ -88,7 +88,7 @@ namespace ProtoTranslator.Parsing {
                     }
             }
             
-            Error("Unexpected token");
+            Error($"Unexpected token '{look.GetLexeme()}'");
             return null;
         }
 
@@ -178,8 +178,6 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Statement Assign() {
-//            Token curToken = look;
-//            Match(Tags.ID);
             LocalVariableSymbol variableSymbol = top.GetVar((prev as WordToken).Lexeme);
             if(variableSymbol == null) Error(prev + " undeclared identifier");
             
@@ -350,7 +348,7 @@ namespace ProtoTranslator.Parsing {
 
         private void Match(int tag) {
             if (look.Tag == tag) { Move(); return; }
-            Error("Unexpected token " + ((char)look.Tag));
+            Error($"Unexpected token '{look.GetLexeme()}', expected '{(char)tag}'");
         }
     }
 }

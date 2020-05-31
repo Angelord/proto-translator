@@ -1,4 +1,5 @@
-﻿using ProtoTranslator.Debug;
+﻿using System;
+using ProtoTranslator.Debug;
 using ProtoTranslator.Generation;
 using ProtoTranslator.Lexer;
 using ProtoTranslator.Parsing;
@@ -9,6 +10,9 @@ namespace ProtoTranslator {
     /// </summary>
     public class Translator {
 
+        public bool LogLexer;
+        public bool LogSyntaxTree; 
+        
         private readonly string sourceFilepath;
         private readonly string programName;
         
@@ -18,12 +22,11 @@ namespace ProtoTranslator {
         }
 
         public void Translate() {
-            
-            Logger lexicalLogger = new ConsoleLogger();
-            Logger treeLogger = new ConsoleLogger();
+
+            ILogger lexicalLogger = CreateLogger(LogLexer);
+            ILogger treeLogger = CreateLogger(LogSyntaxTree);
 
             LexicalAnalyser lexer = new LexicalAnalyser(sourceFilepath, lexicalLogger);
-
             CilEmitter emitter = new CilEmitter(programName);
             
             using (lexer) {
@@ -37,8 +40,13 @@ namespace ProtoTranslator {
                 syntaxTree.Generate(emitter);
             }
             
-//            lexicalLogger.Flush();
+            lexicalLogger.Flush();
             treeLogger.Flush();
+        }
+
+        private ILogger CreateLogger(bool loggingEnabled) {
+            if(loggingEnabled) return new ConsoleLogger();
+            return new EmptyLogger();
         }
     }
 }

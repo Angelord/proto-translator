@@ -10,9 +10,9 @@ namespace ProtoTranslator.Lexer {
         private readonly List<ITokenScanner> scanners;
         private readonly StreamReader fileStream;
         private readonly Pointer pointer;
-        private readonly Logger logger;
+        private readonly ILogger logger;
         
-        public LexicalAnalyser(string filepath, Logger logger) {
+        public LexicalAnalyser(string filepath, ILogger logger) {
 
             this.logger = logger;
             

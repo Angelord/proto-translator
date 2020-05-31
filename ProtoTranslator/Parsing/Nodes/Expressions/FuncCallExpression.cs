@@ -22,7 +22,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             symbol.Function.EmitCall();
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Function call " + symbol.Name);
         }
     }

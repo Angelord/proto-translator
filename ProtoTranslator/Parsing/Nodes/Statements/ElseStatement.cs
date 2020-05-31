@@ -36,7 +36,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             elseStatement.Generate(emitter, elseLabel, after);
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("If");
             logger.IncreaseIndent();
                 logicalExpression.Log(logger);

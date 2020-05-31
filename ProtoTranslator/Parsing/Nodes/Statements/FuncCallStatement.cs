@@ -16,7 +16,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             if (callExpr.ReturnType != typeof(void)) { emitter.EmitPop(); }
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Function call statement : ");
             logger.IncreaseIndent();
             callExpr.Log(logger);

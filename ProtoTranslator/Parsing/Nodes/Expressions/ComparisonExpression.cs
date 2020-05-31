@@ -16,7 +16,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             emitter.EmitComparison(comparisonOperator);
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Relational " + comparisonOperator);
             logger.IncreaseIndent();
             lhs.Log(logger);

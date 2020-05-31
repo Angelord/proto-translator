@@ -38,7 +38,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Debug\Logger.cs" />
+    <Compile Include="Debug\EmptyLogger.cs" />
+    <Compile Include="Debug\ILogger.cs" />
     <Compile Include="Debug\ConsoleLogger.cs" />
     <Compile Include="Generation\CilLabel.cs" />
     <Compile Include="Generation\CilLocalVariable.cs" />

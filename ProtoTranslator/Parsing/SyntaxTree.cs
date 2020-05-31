@@ -12,7 +12,7 @@ namespace ProtoTranslator.Parsing {
             this.root = root;
         }
 
-        public void Log(Logger logger) {
+        public void Log(ILogger logger) {
             root.Log(logger);
         }
 

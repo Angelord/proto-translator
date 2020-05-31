@@ -31,7 +31,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             }
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             first.Log(logger);
             second.Log(logger);
         }

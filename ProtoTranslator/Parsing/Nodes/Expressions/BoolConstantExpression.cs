@@ -18,7 +18,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             emitter.EmitBool(value);
         }
         
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Bool " + value);
         }
     }

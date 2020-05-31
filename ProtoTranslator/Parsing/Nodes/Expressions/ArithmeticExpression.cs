@@ -26,7 +26,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             emitter.EmitBinaryOperator(((char)operatorToken.Tag).ToString());
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Operator " + operatorToken.Tag);
             logger.IncreaseIndent();
             lhs.Log(logger);

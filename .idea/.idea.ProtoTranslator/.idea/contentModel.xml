@@ -17,7 +17,8 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="Debug" t="Include">
           <e p="ConsoleLogger.cs" t="Include" />
-          <e p="Logger.cs" t="Include" />
+          <e p="EmptyLogger.cs" t="Include" />
+          <e p="ILogger.cs" t="Include" />
         </e>
         <e p="Generation" t="Include">
           <e p="CilEmitter.cs" t="Include" />

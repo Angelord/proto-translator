@@ -30,7 +30,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             variableUseExpr.EmitAssignment();
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Assignment");
             logger.IncreaseIndent();
             variableUseExpr.Log(logger);

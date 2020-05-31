@@ -7,7 +7,11 @@
         public IntegerToken(int value) : base(Tags.NUMBER) {
             Value = value;
         }
-        
+
+        public override string GetLexeme() {
+            return Value.ToString();
+        }
+
         public override string ToString() {
             return $"<{Tag}, {Value}>";
         }

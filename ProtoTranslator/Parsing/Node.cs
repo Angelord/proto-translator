@@ -11,6 +11,6 @@ namespace ProtoTranslator.Parsing {
             throw new ParseException(msg, lexline);
         }
         
-        public virtual void Log(Logger logger) { }
+        public virtual void Log(ILogger logger) { }
     }
 }

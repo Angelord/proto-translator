@@ -38,7 +38,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
              */
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("If");
             logger.IncreaseIndent();
             logicalExpr.Log(logger);

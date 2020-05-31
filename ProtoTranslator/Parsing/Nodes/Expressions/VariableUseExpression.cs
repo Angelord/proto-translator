@@ -31,7 +31,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
             symbol.Variable.EmitValue();
         }
 
-        public override void Log(Logger logger) {
+        public override void Log(ILogger logger) {
             logger.LogLine("Variable use " + symbol.Name);
         }
     }
