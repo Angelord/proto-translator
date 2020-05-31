@@ -54,9 +54,14 @@ namespace ProtoTranslator.Lexer.Scanners {
             StringBuilder wordBuilder = new StringBuilder();
             do {
                 wordBuilder.Append(pointer.Current);
-            } while (pointer.Move() && char.IsLetterOrDigit(pointer.Current));
+            } while (pointer.Move() && IsAllowedSymbol(pointer.Current));
 
             return wordBuilder.ToString();
+        }
+
+        /// <summary> Determines if the character can be part of a word. </summary>
+        private bool IsAllowedSymbol(char symbol) {
+            return char.IsLetterOrDigit(symbol) || symbol == '_';
         }
 
         private WordToken CreateFromLexeme(string lexeme) {
