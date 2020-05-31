@@ -9,9 +9,14 @@ namespace ProtoTranslator {
 
         public static void Main(string[] args) {
 
-            Translator translator = new Translator("Resources/Program.c", "GenProgram_ParserTest");
+            Translator translator = new Translator("Resources/Program.c", "Result/GenProgram_ParserTest");
 
-            translator.Translate();
+            try {
+                translator.Translate();
+            }
+            catch (Exception exc) {
+                Console.WriteLine("Error during translation : \n" + exc.Message);
+            }
         }
     }
 }

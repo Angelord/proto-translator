@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
-using ProtoTranslator.Parsing;
 
 namespace ProtoTranslator.Generation {
 
@@ -22,7 +20,7 @@ namespace ProtoTranslator.Generation {
         
         private static readonly MethodInfo ReadLineMethodInfo = typeof(Console).GetMethod("ReadLine", new Type[0]);
 
-        private readonly string exeExePath;
+        private readonly string exePath;
         private readonly AssemblyBuilder assembly;
         private readonly TypeBuilder program;
         private readonly ILGenerator ilGeneratorConstructor;
@@ -34,7 +32,7 @@ namespace ProtoTranslator.Generation {
 
             string exePath = String.Format("{0}/{1}.exe", Program.ExecutionDir, programName);
             
-            exeExePath = exePath;
+            this.exePath = exePath;
 
             AssemblyName assemblyName = new AssemblyName {
                 Name = Path.GetFileNameWithoutExtension(exePath)
@@ -74,8 +72,11 @@ namespace ProtoTranslator.Generation {
             ilGeneratorConstructor.EndScope();
 
             program.CreateType();
+            
+            string exeDirectory = Path.GetDirectoryName(exePath);
+            if (!Directory.Exists(exeDirectory)) { Directory.CreateDirectory(exeDirectory); }
 
-            assembly.Save(Path.GetFileName(exeExePath));
+            assembly.Save(Path.GetFileName(exePath));
         }
 
         public MethodInfo BeginMethod(string methodName, Type returnType, Type[] parameterTypes) {
