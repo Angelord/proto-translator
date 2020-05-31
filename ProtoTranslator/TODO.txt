@@ -3,18 +3,18 @@ Built in function calls
     + printf
     + scanf 
 
+- String support
+
 - Emitter interface
 
-- String support
+- Function declarations and calls
 
 - Implicit Casting to match func params
 
-- More graceful exception handling -> print to terminal and exit.
++ More graceful exception handling -> print to terminal and exit.
 
 + Declarations in more than one place
 
 + Remove { } brackets surrounding entire program
 
 Compound assignment operators (+=, -=, *=, /=)
-
-Function declarations and calls
