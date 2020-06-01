@@ -11,7 +11,6 @@ namespace ProtoTranslator.Lexer {
         }
 
         /// <summary> Returns the lexeme the token was matched to, as found in the original source. </summary>
-        /// <returns></returns>
         public virtual string GetLexeme() {
             return char.ToString((char)Tag);
         }

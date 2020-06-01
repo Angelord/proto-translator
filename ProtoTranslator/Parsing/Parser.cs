@@ -14,7 +14,7 @@ namespace ProtoTranslator.Parsing {
         private LexicalAnalyser lexer;
         private Token look;
         private Token prev;
-        private SymbolTable top;
+        private SymbolTable symbolTable;
         private int memoryUsed = 0; // Memory used for declarations
 
         public Parser(LexicalAnalyser lexer) {
@@ -29,22 +29,22 @@ namespace ProtoTranslator.Parsing {
 
         private Statement Program() {
             
-            top = new SymbolTable();
+            symbolTable = new SymbolTable();
             
-            Statement root = new SeqStatement(new StandardLibraryDefinitionsStatement(top), Statements());
+            Statement root = new SeqStatement(new StandardLibraryDefinitionsStatement(symbolTable), Statements());
 
             return root;
         }
 
         private Statement Block() {
             Match('{'); 
-            SymbolTable savedTable = top;
-            top = new SymbolTable(top);
+            SymbolTable savedTable = symbolTable;
+            symbolTable = new SymbolTable(symbolTable);
 
             Statement statements = Statements();
             
             Match('}');
-            top = savedTable;
+            symbolTable = savedTable;
 
             return statements;
         }
@@ -167,7 +167,7 @@ namespace ProtoTranslator.Parsing {
 
             Match(';');
             
-            LocalVariableSymbol symbol = top.PutVar(identifierToken.Lexeme, type.DotNetType);
+            LocalVariableSymbol symbol = symbolTable.PutVar(identifierToken.Lexeme, type.DotNetType);
             memoryUsed += type.Width;
             
             return new VariableDeclarationStatement(symbol, initialValue);
@@ -178,7 +178,7 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Statement Assign() {
-            LocalVariableSymbol variableSymbol = top.GetVar((prev as WordToken).Lexeme);
+            LocalVariableSymbol variableSymbol = symbolTable.GetVar((prev as WordToken).Lexeme);
             if(variableSymbol == null) Error(prev + " undeclared identifier");
             
             Match('=');
@@ -298,7 +298,7 @@ namespace ProtoTranslator.Parsing {
                     }
                     else {
                         // match variable
-                        LocalVariableSymbol var = top.GetVar((prev as WordToken).Lexeme);
+                        LocalVariableSymbol var = symbolTable.GetVar((prev as WordToken).Lexeme);
                         if(var == null) Error("Undeclared identifier : " + prev);
                         return new VariableUseExpression(var);
                     }
@@ -310,13 +310,13 @@ namespace ProtoTranslator.Parsing {
 
         private FuncCallExpression FuncCallExpression() {
             WordToken idToken = prev as WordToken;
-            ;
+            
             Match('(');
             Expression[] parameters = Parameters();
             Match(')');
             Type[] parameterTypes = ParseUtils.ExpressionArrayToTypes(parameters);
 
-            FunctionSymbol func = top.GetFunc(idToken.Lexeme, parameterTypes);
+            FunctionSymbol func = symbolTable.GetFunc(idToken.Lexeme, parameterTypes);
             if(func == null) Error("Undeclared identifier : " + idToken);
                             
             return new FuncCallExpression(func, parameters);
@@ -341,14 +341,14 @@ namespace ProtoTranslator.Parsing {
             prev = look;   
             look = lexer.ScanToken();
         }
-        
-        private void Error(string message) {
-            throw new ParseException(message, look.Line);
-        }
 
         private void Match(int tag) {
             if (look.Tag == tag) { Move(); return; }
             Error($"Unexpected token '{look.GetLexeme()}', expected '{(char)tag}'");
+        }
+
+        private void Error(string message) {
+            throw new ParseException(message, look.Line);
         }
     }
 }
