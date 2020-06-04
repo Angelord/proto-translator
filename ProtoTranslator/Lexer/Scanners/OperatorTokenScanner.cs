@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using ProtoTranslator.Lexer.Tokens;
 
 namespace ProtoTranslator.Lexer.Scanners {
     
-    public class ComparisonOperatorTokenScanner : ITokenScanner {
+    public class OperatorTokenScanner : ITokenScanner {
 
         private static readonly Dictionary<string, WordToken> MultiCharOperators = new Dictionary<string, WordToken>() {
             { "<", WordToken.Lt },
@@ -14,9 +13,11 @@ namespace ProtoTranslator.Lexer.Scanners {
             { ">=", WordToken.Ge },
             { "==", WordToken.Eq },
             { "||", WordToken.Or },
-            { "&&", WordToken.And } 
+            { "&&", WordToken.And },
+            { "++", WordToken.Increment },
+            { "--", WordToken.Decrement }
         };
-
+        
         public bool TryScan(Pointer pointer, out Token token) {
             
             string nextTwo = pointer.Select(2);

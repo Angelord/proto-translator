@@ -1,8 +1,9 @@
 ﻿
 int input_a = scanf();
-int input_b = scanf();
 
-printf(input_a + input_b);
+--input_a;
+
+printf(input_a);
 
 scanf();
 

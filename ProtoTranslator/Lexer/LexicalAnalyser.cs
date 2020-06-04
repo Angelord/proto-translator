@@ -22,7 +22,7 @@ namespace ProtoTranslator.Lexer {
             scanners = new List<ITokenScanner>() {
                 new NumericTokenScanner(),
                 new WordTokenScanner(),
-                new ComparisonOperatorTokenScanner(),
+                new OperatorTokenScanner(),
                 new DefaultTokenScanner()
             };
         }

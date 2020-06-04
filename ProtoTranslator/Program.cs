@@ -11,12 +11,10 @@ namespace ProtoTranslator {
 
             Translator translator = new Translator("Resources/Program.c", "Result/GenProgram_ParserTest");
 
-            try {
-                translator.Translate();
-            }
-            catch (Exception exc) {
-                Console.WriteLine("Error during translation : \n" + exc.Message);
-            }
+            translator.LogLexer = true;
+            translator.LogSyntaxTree = true;
+            
+            translator.Translate();
         }
     }
 }

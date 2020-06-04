@@ -35,10 +35,10 @@
           <e p="LexicalAnalyser.cs" t="Include" />
           <e p="Pointer.cs" t="Include" />
           <e p="Scanners" t="Include">
-            <e p="ComparisonOperatorTokenScanner.cs" t="Include" />
             <e p="DefaultTokenScanner.cs" t="Include" />
             <e p="ITokenScanner.cs" t="Include" />
             <e p="NumericTokenScanner.cs" t="Include" />
+            <e p="OperatorTokenScanner.cs" t="Include" />
             <e p="StringTokenScanner.cs" t="Include" />
             <e p="WordTokenScanner.cs" t="Include" />
           </e>
@@ -73,6 +73,7 @@
               <e p="NegateExpression.cs" t="Include" />
               <e p="NotExpression.cs" t="Include" />
               <e p="OrExpression.cs" t="Include" />
+              <e p="PrefixArithmeticExpression.cs" t="Include" />
               <e p="VariableUseExpression.cs" t="Include" />
             </e>
             <e p="StandardLibraryDefinitionsStatement.cs" t="Include" />
@@ -81,6 +82,7 @@
               <e p="BreakStatement.cs" t="Include" />
               <e p="DoStatement.cs" t="Include" />
               <e p="ElseStatement.cs" t="Include" />
+              <e p="ExpressionStatement.cs" t="Include" />
               <e p="FuncCallStatement.cs" t="Include" />
               <e p="IfStatement.cs" t="Include" />
               <e p="SeqStatement.cs" t="Include" />

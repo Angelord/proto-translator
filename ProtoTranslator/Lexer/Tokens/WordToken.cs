@@ -10,6 +10,8 @@
             Lt = new WordToken(Tags.LT, "<"),
             Ge = new WordToken(Tags.GE, ">="),
             Gt = new WordToken(Tags.GT, ">"),
+            Increment = new WordToken(Tags.INCR, "++"),
+            Decrement = new WordToken(Tags.DECR, "--"),
             Minus = new WordToken(Tags.MINUS, "minus"),
             True = new WordToken(Tags.TRUE, "true"),
             False = new WordToken(Tags.FALSE, "false"),

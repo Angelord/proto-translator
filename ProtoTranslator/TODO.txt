@@ -3,6 +3,8 @@ Built in function calls
     + printf
     + scanf 
 
+- Pre/Post increment operators
+
 - String support
 
 - Emitter interface

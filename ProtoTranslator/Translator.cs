@@ -28,7 +28,21 @@ namespace ProtoTranslator {
 
             LexicalAnalyser lexer = new LexicalAnalyser(sourceFilepath, lexicalLogger);
             CilEmitter emitter = new CilEmitter(programName);
-            
+
+            try {
+                PerformTranslation(lexer, emitter, treeLogger);
+            }
+            catch (Exception exc) {
+                Console.WriteLine("Error during translation : \n" + exc.Message);
+            }
+            finally {
+                lexicalLogger.Flush();
+                treeLogger.Flush();
+            }
+        }
+
+        private void PerformTranslation(LexicalAnalyser lexer, CilEmitter emitter, ILogger treeLogger) {
+           
             using (lexer) {
                 
                 Parser parser = new Parser(lexer);
@@ -39,9 +53,6 @@ namespace ProtoTranslator {
                 
                 syntaxTree.Generate(emitter);
             }
-            
-            lexicalLogger.Flush();
-            treeLogger.Flush();
         }
 
         private ILogger CreateLogger(bool loggingEnabled) {

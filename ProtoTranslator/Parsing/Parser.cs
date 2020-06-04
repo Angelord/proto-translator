@@ -88,8 +88,10 @@ namespace ProtoTranslator.Parsing {
                     }
             }
             
-            Error($"Unexpected token '{look.GetLexeme()}'");
-            return null;
+            Statement expressionStmt = new ExpressionStatement(Expr());
+            Match(';');
+
+            return expressionStmt;
         }
 
         private Statement If() {
@@ -262,6 +264,17 @@ namespace ProtoTranslator.Parsing {
                 Move();
                 return new NotExpression(Unary());
             }
+            if (look.Tag == Tags.INCR) {
+                Move();
+                Move();
+                return PrefixArithmeticExpression.CreateIncrement(VariableUseExpression());
+            }
+
+            if (look.Tag == Tags.DECR) {
+                Move();
+                Move();
+                return PrefixArithmeticExpression.CreateDecrement(VariableUseExpression());
+            }
 
             return Factor();
         }
@@ -297,10 +310,7 @@ namespace ProtoTranslator.Parsing {
                         return FuncCallExpression();
                     }
                     else {
-                        // match variable
-                        LocalVariableSymbol var = symbolTable.GetVar((prev as WordToken).Lexeme);
-                        if(var == null) Error("Undeclared identifier : " + prev);
-                        return new VariableUseExpression(var);
+                        return VariableUseExpression();
                     }
             }
             
@@ -320,6 +330,12 @@ namespace ProtoTranslator.Parsing {
             if(func == null) Error("Undeclared identifier : " + idToken);
                             
             return new FuncCallExpression(func, parameters);
+        }
+
+        private VariableUseExpression VariableUseExpression() {
+            LocalVariableSymbol var = symbolTable.GetVar((prev as WordToken).Lexeme);
+            if(var == null) Error("Undeclared identifier : " + prev);
+            return new VariableUseExpression(var);
         }
 
         // Matches a list of parameters for a function

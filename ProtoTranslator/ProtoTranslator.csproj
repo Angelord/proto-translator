@@ -55,6 +55,7 @@
     <Compile Include="Parsing\Nodes\Expressions\BinaryLogicalExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\BoolConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\FloatConstantExpression.cs" />
+    <Compile Include="Parsing\Nodes\Expressions\PrefixArithmeticExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\VariableUseExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\IntConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\NegateExpression.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Parsing\Nodes\Statements\BreakStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\DoStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\ElseStatement.cs" />
+    <Compile Include="Parsing\Nodes\Statements\ExpressionStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\FuncCallStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\IfStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\SeqStatement.cs" />
@@ -85,7 +87,7 @@
     <Compile Include="Lexer\LexicalAnalyser.cs" />
     <Compile Include="Lexer\Scanners\DefaultTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\NumericTokenScanner.cs" />
-    <Compile Include="Lexer\Scanners\ComparisonOperatorTokenScanner.cs" />
+    <Compile Include="Lexer\Scanners\OperatorTokenScanner.cs" />
     <Compile Include="Lexer\Scanners\ITokenScanner.cs" />
     <Compile Include="Lexer\Pointer.cs" />
     <Compile Include="Lexer\Scanners\StringTokenScanner.cs" />

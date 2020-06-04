@@ -2,6 +2,8 @@
 
     public static class Tags {
         public const int
+            DECR = 254,
+            INCR = 255,
             AND = 256,
             BASIC_TYPE = 257,
             BREAK = 258,
