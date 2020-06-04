@@ -3,6 +3,7 @@ using ProtoTranslator.Debug;
 using ProtoTranslator.Generation;
 using ProtoTranslator.Lexer;
 using ProtoTranslator.Parsing;
+using ProtoTranslator.Parsing.Exceptions;
 
 namespace ProtoTranslator {
     /// <summary>
@@ -32,7 +33,7 @@ namespace ProtoTranslator {
             try {
                 PerformTranslation(lexer, emitter, treeLogger);
             }
-            catch (Exception exc) {
+            catch (ParseException exc) {
                 Console.WriteLine("Error during translation : \n" + exc.Message);
             }
             finally {

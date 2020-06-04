@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Diagnostics;
 
 namespace ProtoTranslator {
@@ -9,7 +8,7 @@ namespace ProtoTranslator {
 
         public static void Main(string[] args) {
 
-            Translator translator = new Translator("Resources/Program.c", "Result/GenProgram_ParserTest");
+            Translator translator = new Translator("Resources/Program.c", "Result/GenProgram_IncrTest");
 
             translator.LogLexer = true;
             translator.LogSyntaxTree = true;

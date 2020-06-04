@@ -78,14 +78,6 @@ namespace ProtoTranslator.Parsing {
                     return Block();
                 case Tags.BASIC_TYPE:
                     return VariableDeclaration();
-                case Tags.ID:
-                    Move();
-                    if (look.Tag == '(') {
-                        return FuncCallStatement();
-                    }
-                    else {
-                        return Assign();
-                    }
             }
             
             Statement expressionStmt = new ExpressionStatement(Expr());
@@ -179,17 +171,6 @@ namespace ProtoTranslator.Parsing {
             return new FuncCallStatement(FuncCallExpression());
         }
 
-        private Statement Assign() {
-            LocalVariableSymbol variableSymbol = symbolTable.GetVar((prev as WordToken).Lexeme);
-            if(variableSymbol == null) Error(prev + " undeclared identifier");
-            
-            Match('=');
-            Statement stmt = new VariableAssignStatement(new VariableUseExpression(variableSymbol), Bool());
-            
-            Match(';');
-            return stmt;
-        }
-
         private Expression Bool() {
             Expression lhs = Join();
             while (look.Tag == Tags.OR) {
@@ -267,13 +248,12 @@ namespace ProtoTranslator.Parsing {
             if (look.Tag == Tags.INCR) {
                 Move();
                 Move();
-                return PrefixArithmeticExpression.CreateIncrement(VariableUseExpression());
+                return UnaryArithmeticExpression.CreatePreIncrement(VariableUseExpression());
             }
-
             if (look.Tag == Tags.DECR) {
                 Move();
                 Move();
-                return PrefixArithmeticExpression.CreateDecrement(VariableUseExpression());
+                return UnaryArithmeticExpression.CreatePreDecrement(VariableUseExpression());
             }
 
             return Factor();
@@ -310,7 +290,23 @@ namespace ProtoTranslator.Parsing {
                         return FuncCallExpression();
                     }
                     else {
-                        return VariableUseExpression();
+                        VariableUseExpression varUseExpr = VariableUseExpression();
+                        if (look.Tag == Tags.INCR) {
+                            Expression incrExpr = UnaryArithmeticExpression.CreatePostIncrement(varUseExpr);
+                            Move();
+                            return incrExpr;
+                        }
+                        if (look.Tag == Tags.DECR) {
+                            Expression decrExpr = UnaryArithmeticExpression.CreatePostDecrement(varUseExpr);
+                            Move();
+                            return decrExpr;
+                        }
+                        if (look.Tag == '=') {
+                            Move();
+                            return new VariableAssignExpression(varUseExpr, Bool());
+                        }
+
+                        return varUseExpr;
                     }
             }
             

@@ -55,7 +55,8 @@
     <Compile Include="Parsing\Nodes\Expressions\BinaryLogicalExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\BoolConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\FloatConstantExpression.cs" />
-    <Compile Include="Parsing\Nodes\Expressions\PrefixArithmeticExpression.cs" />
+    <Compile Include="Parsing\Nodes\Expressions\UnaryArithmeticExpression.cs" />
+    <Compile Include="Parsing\Nodes\Expressions\VariableAssignExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\VariableUseExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\IntConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\NegateExpression.cs" />

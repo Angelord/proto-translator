@@ -1,7 +1,7 @@
 ﻿
 int input_a = scanf();
 
---input_a;
+++input_a;
 
 printf(input_a);
 
