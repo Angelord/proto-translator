@@ -10,7 +10,8 @@ namespace ProtoTranslator {
         public static Type Max(Type first, Type second) {
             if (first == typeof(float) || second == typeof(float)) return typeof(float);
             if (first == typeof(int) || second == typeof(int)) return typeof(int);
-            return typeof(char);
+            if (first == typeof(char) || second == typeof(char)) return typeof(char);
+            return typeof(bool);
         }
     }
 }

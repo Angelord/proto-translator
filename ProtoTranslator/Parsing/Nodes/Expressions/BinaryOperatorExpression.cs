@@ -3,14 +3,14 @@ using ProtoTranslator.Generation;
 using ProtoTranslator.Lexer;
 
 namespace ProtoTranslator.Parsing.Nodes.Expressions {
-    // Implements binary operators like + and *
-    public class ArithmeticExpression : Expression {
+    // Implements binary operators such as &&, ||, +, -, /, *
+    public class BinaryOperatorExpression : Expression {
 
         private readonly Token operatorToken;
         private readonly Expression lhs;
         private readonly Expression rhs;
 
-        public ArithmeticExpression(Token operatorToken, Expression lhs, Expression rhs) : base(null) {
+        public BinaryOperatorExpression(Token operatorToken, Expression lhs, Expression rhs) : base(null) {
             this.operatorToken = operatorToken;
             this.lhs = lhs;
             this.rhs = rhs;

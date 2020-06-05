@@ -175,7 +175,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Join();
             while (look.Tag == Tags.OR) {
                 Move();
-                lhs = new OrExpression(lhs, Join());
+                lhs = new BinaryOperatorExpression(prev, lhs, Join());
             }
 
             return lhs;
@@ -185,7 +185,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = BitwiseOr();
             while (look.Tag == Tags.AND) {
                 Move();
-                lhs = new AndExpression(lhs, BitwiseOr());
+                lhs = new BinaryOperatorExpression(prev, lhs, BitwiseOr());
             }
 
             return lhs;
@@ -195,7 +195,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = BitwiseAnd();
             while (look.Tag == '|') {
                 Move();
-                lhs = new ArithmeticExpression(prev, lhs, BitwiseAnd());
+                lhs = new BinaryOperatorExpression(prev, lhs, BitwiseAnd());
             }
 
             return lhs;
@@ -205,7 +205,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Equality();
             while (look.Tag == '&') {
                 Move();
-                lhs = new ArithmeticExpression(prev, lhs, Equality());
+                lhs = new BinaryOperatorExpression(prev, lhs, Equality());
             }
 
             return lhs;
@@ -239,7 +239,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Mult();
             while (look.Tag == '+' || look.Tag == '-') {
                 Move();
-                lhs = new ArithmeticExpression(prev, lhs, Mult());
+                lhs = new BinaryOperatorExpression(prev, lhs, Mult());
             }
 
             return lhs;
@@ -250,7 +250,7 @@ namespace ProtoTranslator.Parsing {
             while (look.Tag == '*' || look.Tag == '/' || look.Tag == '%') {
                 Token cur = look;
                 Move();
-                expr = new ArithmeticExpression(cur, expr, Unary());
+                expr = new BinaryOperatorExpression(cur, expr, Unary());
             }
 
             return expr;

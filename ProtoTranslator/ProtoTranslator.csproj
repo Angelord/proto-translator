@@ -50,8 +50,7 @@
     <Compile Include="Keywords.cs" />
     <Compile Include="Lexer\Tokens\TypeToken.cs" />
     <Compile Include="Parsing\Exceptions\ParseException.cs" />
-    <Compile Include="Parsing\Nodes\Expressions\AndExpression.cs" />
-    <Compile Include="Parsing\Nodes\Expressions\ArithmeticExpression.cs" />
+    <Compile Include="Parsing\Nodes\Expressions\BinaryOperatorExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\BinaryLogicalExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\BoolConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\FloatConstantExpression.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="Parsing\Nodes\Expressions\IntConstantExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\NegateExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\NotExpression.cs" />
-    <Compile Include="Parsing\Nodes\Expressions\OrExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\ComparisonExpression.cs" />
     <Compile Include="Parsing\Nodes\Expressions\FuncCallExpression.cs" />
     <Compile Include="Parsing\Nodes\StandardLibraryDefinitionsStatement.cs" />
