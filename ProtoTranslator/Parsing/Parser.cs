@@ -227,7 +227,7 @@ namespace ProtoTranslator.Parsing {
 
         private Expression Term() {
             Expression expr = Unary();
-            while (look.Tag == '*' || look.Tag == '/') {
+            while (look.Tag == '*' || look.Tag == '/' || look.Tag == '%') {
                 Token cur = look;
                 Move();
                 expr = new ArithmeticExpression(cur, expr, Unary());

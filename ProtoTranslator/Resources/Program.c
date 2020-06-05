@@ -1,9 +1,10 @@
 ﻿
 int input_a = scanf();
+int input_b = scanf();
 
-++input_a;
+int result = input_a % input_b;
 
-printf(input_a);
+printf(result);
 
 scanf();
 
