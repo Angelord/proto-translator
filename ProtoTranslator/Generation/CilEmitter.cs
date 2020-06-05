@@ -253,7 +253,7 @@ namespace ProtoTranslator.Generation {
                     break;
             }
         }
-        
+
         public void EmitBinaryOperator(string op) {
             switch (op) {
                 case "+":

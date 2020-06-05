@@ -80,7 +80,7 @@ namespace ProtoTranslator.Parsing {
                     return VariableDeclaration();
             }
             
-            Statement expressionStmt = new ExpressionStatement(Expr());
+            Statement expressionStmt = new ExpressionStatement(Additive());
             Match(';');
 
             return expressionStmt;
@@ -182,10 +182,30 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Expression Join() {
-            Expression lhs = Equality();
+            Expression lhs = BitwiseOr();
             while (look.Tag == Tags.AND) {
                 Move();
-                lhs = new AndExpression(lhs, Equality());
+                lhs = new AndExpression(lhs, BitwiseOr());
+            }
+
+            return lhs;
+        }
+
+        private Expression BitwiseOr() {
+            Expression lhs = BitwiseAnd();
+            while (look.Tag == '|') {
+                Move();
+                lhs = new ArithmeticExpression(prev, lhs, BitwiseAnd());
+            }
+
+            return lhs;
+        }
+
+        private Expression BitwiseAnd() {
+            Expression lhs = Equality();
+            while (look.Tag == '&') {
+                Move();
+                lhs = new ArithmeticExpression(prev, lhs, Equality());
             }
 
             return lhs;
@@ -202,30 +222,30 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Expression Relational() {
-            Expression lhs = Expr();
+            Expression lhs = Additive();
             switch (look.Tag) {
                 case Tags.LE:
                 case Tags.GE:
                 case Tags.LT:
                 case Tags.GT:
                     Move();
-                    return new ComparisonExpression((prev as WordToken), lhs, Expr());
+                    return new ComparisonExpression((prev as WordToken), lhs, Additive());
                 default:
                     return lhs;
             }
         }
 
-        private Expression Expr() {
-            Expression lhs = Term();
+        private Expression Additive() {
+            Expression lhs = Mult();
             while (look.Tag == '+' || look.Tag == '-') {
                 Move();
-                lhs = new ArithmeticExpression(prev, lhs, Term());
+                lhs = new ArithmeticExpression(prev, lhs, Mult());
             }
 
             return lhs;
         }
 
-        private Expression Term() {
+        private Expression Mult() {
             Expression expr = Unary();
             while (look.Tag == '*' || look.Tag == '/' || look.Tag == '%') {
                 Token cur = look;

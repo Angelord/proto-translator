@@ -2,9 +2,11 @@
 int input_a = scanf();
 int input_b = scanf();
 
-int result = input_a % input_b;
+int resultOR = input_a | input_b;
+int resultAND = input_a & input_b;
 
-printf(result);
+printf(resultOR);
+printf(resultAND);
 
 scanf();
 
