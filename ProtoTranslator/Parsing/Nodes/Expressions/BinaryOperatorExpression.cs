@@ -23,7 +23,7 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
         public override void EmitRValue(CilEmitter emitter) {
             lhs.EmitRValue(emitter);
             rhs.EmitRValue(emitter);
-            emitter.EmitBinaryOperator(((char)operatorToken.Tag).ToString());
+            emitter.EmitBinaryOperator(operatorToken.GetLexeme());
         }
 
         public override void Log(ILogger logger) {
