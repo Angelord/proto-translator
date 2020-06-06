@@ -215,7 +215,7 @@ namespace ProtoTranslator.Parsing {
             Expression lhs = Relational();
             while (look.Tag == Tags.EQ || look.Tag == Tags.NE) {
                 Move();
-                lhs = new ComparisonExpression((prev as WordToken), lhs, Relational());
+                lhs = new ComparisonExpression(prev, lhs, Relational());
             }
 
             return lhs;
@@ -226,10 +226,10 @@ namespace ProtoTranslator.Parsing {
             switch (look.Tag) {
                 case Tags.LE:
                 case Tags.GE:
-                case Tags.LT:
-                case Tags.GT:
+                case '<':
+                case '>':
                     Move();
-                    return new ComparisonExpression((prev as WordToken), lhs, Additive());
+                    return new ComparisonExpression(prev, lhs, Additive());
                 default:
                     return lhs;
             }

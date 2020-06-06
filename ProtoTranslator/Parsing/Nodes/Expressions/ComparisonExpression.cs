@@ -1,6 +1,6 @@
 ﻿using ProtoTranslator.Debug;
 using ProtoTranslator.Generation;
-using ProtoTranslator.Lexer.Tokens;
+using ProtoTranslator.Lexer;
 
 namespace ProtoTranslator.Parsing.Nodes.Expressions {
     // Implements the operators <, <=, ==, !=, >= and >
@@ -8,8 +8,8 @@ namespace ProtoTranslator.Parsing.Nodes.Expressions {
 
         private readonly string comparisonOperator;
 
-        public ComparisonExpression(WordToken token, Expression lhs, Expression rhs) : base(lhs, rhs) {
-            comparisonOperator = token.Lexeme;
+        public ComparisonExpression(Token token, Expression lhs, Expression rhs) : base(lhs, rhs) {
+            comparisonOperator = token.GetLexeme();
         }
 
         protected override void EmitOperator(CilEmitter emitter) {
