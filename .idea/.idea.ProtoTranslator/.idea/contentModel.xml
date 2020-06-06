@@ -75,6 +75,7 @@
               <e p="ExpressionStatement.cs" t="Include" />
               <e p="FuncCallStatement.cs" t="Include" />
               <e p="IfStatement.cs" t="Include" />
+              <e p="InfiniteLoopStatement.cs" t="Include" />
               <e p="SeqStatement.cs" t="Include" />
               <e p="VariableAssignStatement.cs" t="Include" />
               <e p="VariableDeclarationStatement.cs" t="Include" />

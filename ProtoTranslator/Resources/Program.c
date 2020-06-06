@@ -1,23 +1,17 @@
 ﻿
-int c = 200;
-int d = 300;
-int A = 2;
-int B = 2*4;
 
-if (A > 1){
-	if (A == 2){
-		if (B<10){
-			printf(c);
-		}
-	}
-	else { 
-	    printf(d);
-	}
-}
+int a = 0;
 
-printf(A);
+infinite
+    printf(a);
+    a++;
+    
+    if(a == 5) {
+        break;
+    }
+loop
+
 scanf();
-
 
 //int A = 0;
 //

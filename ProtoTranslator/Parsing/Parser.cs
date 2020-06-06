@@ -56,7 +56,7 @@ namespace ProtoTranslator.Parsing {
         }
 
         private Statement Statements() {
-            if (look == null || look.Tag == '}') return Nodes.Statement.Null;
+            if (look == null || look.Tag == '}' || look.Tag == Tags.LOOP) return Nodes.Statement.Null;
             return new SeqStatement(Stmt(), Statements());
         }
 
@@ -72,6 +72,8 @@ namespace ProtoTranslator.Parsing {
                     return While();
                 case Tags.DO:
                     return Do();
+                case Tags.INFINITE:
+                    return InfiniteLoop();
                 case Tags.BREAK:
                     return Break();
                 case '{':
@@ -104,6 +106,22 @@ namespace ProtoTranslator.Parsing {
             return new ElseStatement(condition, ifContents, elseContents);
         }
 
+        private Statement InfiniteLoop() {
+            
+            InfiniteLoopStatement infiniteLoop = new InfiniteLoopStatement();
+            Statement savedStatement = Statement.Enclosing;
+            Statement.Enclosing = infiniteLoop; // Reset enclosing statement
+            
+            Match(Tags.INFINITE);
+            Statement contents = Statements();
+            Match(Tags.LOOP);
+
+            infiniteLoop.Init(contents);
+            Statement.Enclosing = savedStatement; // Reset enclosing statement
+            
+            return infiniteLoop;
+        }
+
         private Statement While() {
             WhileStatement whileNode = new WhileStatement();
             Statement stavedStmt = Statement.Enclosing;
@@ -115,7 +133,7 @@ namespace ProtoTranslator.Parsing {
             Match(')');
             
             whileNode.Init(condition, Stmt());
-            Nodes.Statement.Enclosing = stavedStmt; // Reset enclosing statement
+            Statement.Enclosing = stavedStmt; // Reset enclosing statement
 
             return whileNode;
         }

@@ -70,6 +70,7 @@
     <Compile Include="Parsing\Nodes\Statements\ExpressionStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\FuncCallStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\IfStatement.cs" />
+    <Compile Include="Parsing\Nodes\Statements\InfiniteLoopStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\SeqStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\VariableAssignStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\VariableDeclarationStatement.cs" />

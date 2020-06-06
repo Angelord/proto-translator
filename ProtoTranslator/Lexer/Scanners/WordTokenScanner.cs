@@ -18,6 +18,8 @@ namespace ProtoTranslator.Lexer.Scanners {
             ReserveWord(new WordToken(Tags.DO, "do"));
             ReserveWord(new WordToken(Tags.WHILE, "while"));
             ReserveWord(new WordToken(Tags.BREAK, "break"));
+            ReserveWord(new WordToken(Tags.INFINITE, "infinite"));
+            ReserveWord(new WordToken(Tags.LOOP, "loop"));
             ReserveWord(WordToken.True);
             ReserveWord(WordToken.False);
             
