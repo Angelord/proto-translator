@@ -1,14 +1,9 @@
 ﻿
-bool input_a = true;
-bool input_b = true;
-
-if(input_a || input_b) {
-    printf(1);
-}
-
-if(input_a && input_b) {
-    printf(2);
-}   
+int i = 0;
+do {
+    printf(i);
+    i++;
+} while(i < 5);
 
 scanf();
 
