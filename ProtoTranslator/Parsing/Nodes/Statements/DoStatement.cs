@@ -1,4 +1,5 @@
-﻿using ProtoTranslator.Generation;
+﻿using ProtoTranslator.Debug;
+using ProtoTranslator.Generation;
 
 namespace ProtoTranslator.Parsing.Nodes {
     public class DoStatement : Statement {
@@ -29,7 +30,17 @@ namespace ProtoTranslator.Parsing.Nodes {
             
             logicalExpr.EmitRValue(emitter);
             
-            begin.EmitJumpIfFalse();
+            begin.EmitJumpIfTrue();
+        }
+
+        public override void Log(ILogger logger) {
+            logger.LogLine("Do Statement");
+            logger.IncreaseIndent();
+                logger.LogLine("Statement : ");
+                statement.Log(logger);
+                logger.LogLine("Condition : ");
+                logicalExpr.Log(logger);
+            logger.DecreaseIndent();
         }
     }
 }

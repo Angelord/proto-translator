@@ -1,8 +1,9 @@
 ﻿
 int i = 0;
+
 do {
-    printf(i);
     i++;
+    printf(i);
 } while(i < 5);
 
 scanf();

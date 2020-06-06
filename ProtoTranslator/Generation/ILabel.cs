@@ -9,5 +9,8 @@
 
         /// <summary> Emits a jump to this label if a condition is false. </summary>
         void EmitJumpIfFalse();
+
+        /// <summary> Emits a jump to this label if a condition is true. </summary>
+        void EmitJumpIfTrue();
     }
 }

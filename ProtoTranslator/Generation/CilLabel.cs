@@ -23,5 +23,9 @@ namespace ProtoTranslator.Generation {
         public void EmitJumpIfFalse() {
             generator.Emit(OpCodes.Brfalse, label);
         }
+
+        public void EmitJumpIfTrue() {
+            generator.Emit(OpCodes.Brtrue, label);
+        }
     }
 }
