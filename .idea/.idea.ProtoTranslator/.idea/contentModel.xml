@@ -91,6 +91,10 @@
         </e>
         <e p="ProtoTranslator.csproj" t="IncludeRecursive" />
         <e p="Resources" t="Include">
+          <e p="Arithmetic.c" t="Include" />
+          <e p="Bitwise.c" t="Include" />
+          <e p="Branching.c" t="Include" />
+          <e p="IO.c" t="Include" />
           <e p="Program.c" t="Include" />
         </e>
         <e p="SymbolTables" t="Include">
