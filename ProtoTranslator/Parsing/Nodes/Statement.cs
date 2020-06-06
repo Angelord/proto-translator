@@ -10,6 +10,16 @@ namespace ProtoTranslator.Parsing.Nodes {
 
         public static Statement Enclosing = Statement.Null; // Used for break stmts
 
-        public virtual void Generate(CilEmitter emitter, ILabel begin, ILabel after) { }
+        public ILabel begin;
+
+        public ILabel after;
+
+        public void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+            this.begin = begin;
+            this.after = after;
+            DoGenerate(emitter);
+        }
+
+        protected virtual void DoGenerate(CilEmitter emitter) { }
     }
 }

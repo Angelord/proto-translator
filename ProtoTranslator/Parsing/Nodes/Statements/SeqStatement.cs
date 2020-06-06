@@ -12,7 +12,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             this.second = second;
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             if (first == Statement.Null) {
                 second.Generate(emitter, begin, after);
             }

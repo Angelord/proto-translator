@@ -19,7 +19,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
                 logicalExpression.Error("Expression in if must evaluate to bool");
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
 
             ILabel ifLabel = emitter.GenerateLabel();
             ILabel elseLabel = emitter.GenerateLabel();

@@ -1,13 +1,12 @@
 ﻿
-int i = 0;
+int A = 0;
 
-do {
-    i++;
-    printf(i);
-} while(i < 5);
+while(A < 5) {
+    printf(A);
+    ++A;
+}
 
 scanf();
-
 //int b = 3;
 //int c = 4 + 5;
 //

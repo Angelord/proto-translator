@@ -23,7 +23,7 @@ namespace ProtoTranslator.Parsing.Nodes {
             scanF = table.PutFunc(WordToken.ScanF.Lexeme, typeof(string), new Type[0]);
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             printInt.Function = emitter.GetWriteFunction(typeof(int));
             printFloat.Function = emitter.GetWriteFunction(typeof(float));
             printChar.Function = emitter.GetWriteFunction(typeof(char));

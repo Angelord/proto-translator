@@ -14,7 +14,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             // TODO : Type checking
         }
         
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             symbol.Variable = emitter.EmitLocalVarDeclaration(symbol.Name, symbol.VariableType);
 
             if (initialValue != null) {

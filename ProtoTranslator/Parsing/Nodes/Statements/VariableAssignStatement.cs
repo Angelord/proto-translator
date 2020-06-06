@@ -23,7 +23,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             Error("Type Error");
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             valueExpr.EmitRValue(emitter);
             if (valueExpr.ReturnType == typeof(string)) { emitter.EmitParse(variableUseExpr.ReturnType); }
 

@@ -11,7 +11,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             this.callExpr = callExpr;
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             callExpr.EmitRValue(emitter);
             if (callExpr.ReturnType != typeof(void)) { emitter.EmitPop(); }
         }

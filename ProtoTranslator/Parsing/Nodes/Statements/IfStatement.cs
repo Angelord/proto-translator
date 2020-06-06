@@ -14,7 +14,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             if (logicalExpr.ReturnType != typeof(bool)) logicalExpr.Error("Expression in if must evaluate to bool");
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
 
             ILabel contentsLabel = emitter.GenerateLabel();
 

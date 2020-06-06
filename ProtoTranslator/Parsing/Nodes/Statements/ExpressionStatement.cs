@@ -10,7 +10,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             this.expression = expression;
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
             
             expression.EmitRValue(emitter);
 

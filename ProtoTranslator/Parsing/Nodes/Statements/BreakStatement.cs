@@ -12,8 +12,8 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
             loopStatement = Statement.Enclosing;
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
-            after.EmitJump();
+        protected override void DoGenerate(CilEmitter emitter) {
+            loopStatement.after.EmitJump();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ProtoTranslator.Parsing.Nodes.Statements {
                 logicalExpr.Error("Expression in while must evaluate to bool"); 
         }
 
-        public override void Generate(CilEmitter emitter, ILabel begin, ILabel after) {
+        protected override void DoGenerate(CilEmitter emitter) {
 
             ILabel whileLabel = emitter.GenerateLabel();
 

@@ -99,7 +99,7 @@ namespace ProtoTranslator.Generation {
 
             EndScope();
         }
-
+        
         public void EmitReturn() {
             ilGenerator.Emit(OpCodes.Ret);
         }
