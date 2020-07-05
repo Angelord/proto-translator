@@ -72,6 +72,7 @@
     <Compile Include="Parsing\Nodes\Statements\IfStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\InfiniteLoopStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\SeqStatement.cs" />
+    <Compile Include="Parsing\Nodes\Statements\StepsStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\VariableAssignStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\VariableDeclarationStatement.cs" />
     <Compile Include="Parsing\Nodes\Statements\WhileStatement.cs" />

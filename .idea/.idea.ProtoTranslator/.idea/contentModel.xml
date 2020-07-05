@@ -77,6 +77,7 @@
               <e p="IfStatement.cs" t="Include" />
               <e p="InfiniteLoopStatement.cs" t="Include" />
               <e p="SeqStatement.cs" t="Include" />
+              <e p="StepsStatement.cs" t="Include" />
               <e p="VariableAssignStatement.cs" t="Include" />
               <e p="VariableDeclarationStatement.cs" t="Include" />
               <e p="WhileStatement.cs" t="Include" />

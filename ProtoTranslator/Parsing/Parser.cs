@@ -74,6 +74,8 @@ namespace ProtoTranslator.Parsing {
                     return Do();
                 case Tags.INFINITE:
                     return InfiniteLoop();
+                case Tags.STEPS:
+                    return StepsLoop();
                 case Tags.BREAK:
                     return Break();
                 case '{':
@@ -104,6 +106,23 @@ namespace ProtoTranslator.Parsing {
             Statement elseContents = Stmt();
             
             return new ElseStatement(condition, ifContents, elseContents);
+        }
+
+        private Statement StepsLoop() {
+            StepsStatement stepsLoop = new StepsStatement(); 
+            
+            Statement savedStatement = Statement.Enclosing;
+            Statement.Enclosing = stepsLoop; // Reset enclosing statement
+
+            Match(Tags.STEPS);
+            Match('(');
+            Expression count = Additive();
+            Match(')');
+            
+            stepsLoop.Init(count, Stmt());
+            Statement.Enclosing = savedStatement; // Reset enclosing statement
+            
+            return stepsLoop;
         }
 
         private Statement InfiniteLoop() {

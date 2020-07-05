@@ -1,15 +1,7 @@
 ﻿
-
-int a = 0;
-
-infinite
-    printf(a);
-    a++;
-    
-    if(a == 5) {
-        break;
-    }
-loop
+steps (5) {
+    printf(true);
+}
 
 scanf();
 

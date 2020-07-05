@@ -2,6 +2,7 @@
 
     public static class Tags {
         public const int
+            STEPS = 253,
             DECR = 254,
             INCR = 255,
             AND = 256,
